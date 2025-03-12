@@ -9,6 +9,7 @@ import AboutSection from "../components/AboutSection";
 import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
 import sanityClient from "@sanity/client";
+import { WhyData } from "../components/types";
 
 interface AboutRow {
   title: string;
@@ -24,17 +25,6 @@ interface AboutData {
   title: string;
   description: string;
   data: AboutRow[];
-}
-
-interface WhyRow {
-  title: string;
-  description: string;
-}
-
-interface WhyData {
-  title: string;
-  description: string;
-  data: WhyRow[];
 }
 
 const fadeIn: Variants = {
@@ -60,16 +50,17 @@ export default function HomePage() {
           `*[_type == "aboutSection"][0]{ title, description, data[] { title, description, image { asset -> { url } } } }`
         );
         setAboutData(about);
-
+  
         const why = await client.fetch<WhyData>(
           `*[_type == "whyData"][0]{ title, description, data }`
         );
+        console.log("Fetched whyData: ", why);  // Log to check the structure of whyData
         setWhyData(why);
       } catch (error) {
         console.error("Error fetching data from Sanity:", error);
       }
     };
-
+  
     fetchData();
   }, []);
 
