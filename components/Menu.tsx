@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // Definizione del tipo di dati
 interface MenuItem {
-  _key: string; // Aggiunto per risolvere l'errore
+  _key: string;
   name: string;
   description: string;
   price: string;
@@ -73,7 +73,7 @@ const Menu = ({ client }) => {
         ) : (
           menuItems.map((item) => (
             <div key={item._key} className={styles.menuItem}>
-              {/* Controllo per verificare la presenza dell'immagine */}
+              {/* Controllo per verificare la presenza immagine */}
               {item.image?.asset?.url ? (
                 <Image
                   src={item.image.asset.url}

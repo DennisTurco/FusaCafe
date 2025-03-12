@@ -6,15 +6,6 @@ import { GrFormClose } from "react-icons/gr";
 
 export const Navbar: React.FC = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
-    const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-    const openPopup = () => {
-        setIsPopupVisible(true);
-    };
-
-    const closePopup = () => {
-        setIsPopupVisible(false);
-    };
 
     return (
         <header className={styles.container}>
@@ -27,7 +18,6 @@ export const Navbar: React.FC = () => {
                 <Link href="/"> Home </Link>
                 <Link href="/Menu"> Menu </Link>
                 <Link href="/Cats"> Gatti </Link>
-                {/* <Link href="/Projects"> Progetti </Link> */}
             </div>
 
             {hamburgerClicked ? (
@@ -49,7 +39,6 @@ export const Navbar: React.FC = () => {
                     <Link href="/" onClick={() => setHamburgerClicked(false)}> Home </Link>
                     <Link href="/Menu" onClick={() => setHamburgerClicked(false)}> Menu </Link>
                     <Link href="/Cats" onClick={() => setHamburgerClicked(false)}> Gatti </Link>
-                    {/* <Link href="#" onClick={(e) => { e.preventDefault(); openPopup(); }}> Contattaci </Link> */}
                 </div>
             </div>
         </header>

@@ -24,7 +24,7 @@ export default function CatsSection({ client }) {
       .then((data) => {
         console.log("Dati ricevuti:", data); // Controlla il formato dei dati in console
         if (data.length > 0) {
-          setGatti(data[0].data || []); // Prendi l'array `data` dal primo documento
+          setGatti(data[0].data || []); 
         } else {
           setGatti([]); // Nessun gatto disponibile
         }
@@ -44,7 +44,7 @@ export default function CatsSection({ client }) {
     <section className={styles.gattiSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>I Nostri Gatti</h2>
-        <p className={styles.subtitle}>Incontra alcuni dei gatti disponibili per l'adozione!</p>
+        <p className={styles.subtitle}>Incontra alcuni dei gatti disponibili per l&apos;adozione!</p>
 
         {gatti.length === 0 ? (
           <p className={styles.noCats}>Al momento non ci sono gatti disponibili.</p>
