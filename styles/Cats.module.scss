@@ -1,0 +1,81 @@
+@use "resolution" as *;
+
+.gattiSection {
+    padding: 3rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-size: var(--xl-header-fs);
+    font-weight: 700;
+    color: var(--cats-title);
+}
+
+.subtitle {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: var(--cats-subtitle);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonne */
+    gap: 0.5rem; /* Riduci lo spazio tra le card */
+    margin-top: 2rem;
+}
+
+@media (max-width: $media-tablet) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonne per schermi più piccoli */
+        gap: 0.5rem; /* Mantieni uno spazio ravvicinato anche sui dispositivi più piccoli */
+    }
+}
+
+@media (max-width: $media-mobile) {
+    .grid {
+        grid-template-columns: 1fr; /* 1 colonna per schermi molto piccoli */
+        gap: 0.5rem; /* Stessa cosa qui, ridotto lo spazio tra le card */
+    }
+}
+
+.card {
+    background: var(--cats-card-bg);
+    box-shadow: 0 4px 6px var(--cats-card-shadow);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: left;
+    max-width: 320px; /* Set a maximum width for the card */
+    margin: 0 auto; /* Center the card inside the grid */
+}
+
+.image {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* Max width of the image */
+    max-height: 200px; /* Max height of the image */
+    object-fit: cover; /* Ensure the image is cropped and doesn't stretch */
+}
+
+.name {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.details {
+    margin-top: 0.5rem;
+    color: var(---cats-card-desc);
+    list-style: none;
+    padding: 0;
+}
+
+.description {
+    margin-top: 1rem;
+    color: var(--cats-card-desc);
+}

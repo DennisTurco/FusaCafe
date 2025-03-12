@@ -1,0 +1,24 @@
+@use "resolution" as *;
+
+.title {
+  color: var(--about-title);
+  font-size: 2.25rem; // 4xl
+  font-weight: 800;
+}
+
+.text {
+  color: var(--about-text);
+  font-size: 1.125rem; // lg
+  margin-top: 1rem;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 24rem; // 96
+  background-color: var(--about-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}

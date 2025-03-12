@@ -1,0 +1,68 @@
+@use "resolution" as *;
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+        /* Sposta la freccia in basso */
+    }
+}
+
+.heroSection {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Imposta l'altezza della Hero Section al 100% della finestra del browser */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        //background-color: rgba(0, 0, 0, 0.4); /* Per opacizzare per mettere una scritta in sovraimpressione*/
+    }
+
+    .content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    .scrollDown {
+        position: absolute;
+        bottom: 30px;
+        /* Posiziona la freccia in basso */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: white;
+        opacity: 0.8;
+        cursor: pointer;
+        animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .arrow {
+        position: absolute; /* Posiziona la GIF assolutamente rispetto alla sezione */
+        bottom: 15%; /* Aggiusta la distanza dal fondo */
+        left: 50%; /* Centra orizzontalmente */
+        transform: translateX(-50%); /* Centra esattamente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

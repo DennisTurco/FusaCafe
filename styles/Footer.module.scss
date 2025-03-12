@@ -1,0 +1,65 @@
+@use "resolution" as *;
+
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Allinea gli elementi verticalmente */
+  align-items: center; /* Centra tutto */
+}
+
+.links_container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+
+  a {
+    color: var(--footer-links);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--footer-links-hover);
+    }
+  }
+}
+
+.social_container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+
+  .social_link {
+    color: var(--footer-social);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* Assicura che il copyright sia centrato e sotto al resto */
+.copyright_wrapper {
+  width: 100%; /* Fa sì che occupi tutta la larghezza del footer */
+  margin-top: 20px;
+}
+
+.copyright {
+  padding: 10px 0;
+  font-size: 14px;
+  background-color: var(--copyright-bg);
+  width: 100%;
+  text-align: center;
+  
+  a {
+    color: var(--copyright-link);
+    text-decoration: none;
+    font-weight: bold;
+  }
+}

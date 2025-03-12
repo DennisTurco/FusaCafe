@@ -1,0 +1,202 @@
+@use "resolution" as *;
+
+.heroSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--hero-bg-gradient-1), var(--hero-bg-gradient-2)); /* Gradiente di colore */
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 2s ease-out;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--hero-text);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-family: 'Pacifico', sans-serif;  /* Modificato il font */
+  animation: slideUp 1s ease-out, pulsate 2s infinite; /* Aggiunta animazione pulsante */
+}
+
+.gifContainer {
+  margin-bottom: 2rem; /* Spazio tra gif e titolo */
+}
+
+.gifImage {
+  width: 100%;
+  max-width: 250px; /* Limita la larghezza della gif */
+  height: auto;
+  object-fit: contain;
+}
+
+.phoneContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  animation: fadeIn 2s ease-out;
+  margin-top: 1rem;
+}
+
+.phone {
+  font-size: 1.3rem;
+  color: var(--hero-text);
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--hero-text);
+  line-height: 1.6;
+  max-width: 600px;
+  animation: fadeIn 2s ease-out;
+}
+
+.buttonsContainer {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background-color: var(--hero-button-bg);
+  color: var(--hero-button-text);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 10px var(--hero-button-shadow);
+}
+
+.button:hover {
+  background-color: var(--hero-button-hover);
+  transform: scale(1.1);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.scrollDown {
+  position: absolute;
+  bottom: 10%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: var(--hero-scroll-arrow);
+  animation: bounce 1s infinite ease-in-out; /* Modifica l'animazione */
+}
+
+/* Animazione di bounce */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); /* Posizione iniziale */
+  }
+  50% {
+    transform: translateY(-10px); /* Rimbalzo verso l'alto */
+  }
+}
+
+/* Animazioni */
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Media Query per schermi più piccoli */
+@media (max-width: $media-tablet) {
+  .title {
+    font-size: 3rem;
+    letter-spacing: 2px;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .gifImage {
+    max-width: 200px; /* Ridurre la dimensione della gif su dispositivi piccoli */
+  }
+
+  .phoneContainer {
+    gap: 5px;
+  }
+
+  .scrollDown {
+    bottom: 5%;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: $media-mobile) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    margin: 0 10px; /* Più margine per evitare il testo troppo vicino ai bordi */
+  }
+
+  .button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .scrollDown {
+    font-size: 1.2rem;
+  }
+}

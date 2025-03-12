@@ -1,0 +1,64 @@
+@use "resolution" as *;
+
+.footer {
+  background: linear-gradient(145deg, var(--findus-bg-gradient-1), var(--findus-bg-gradient-2)); /* Gradient background */
+  color: white;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px 20px 0px 0px; // only top
+  box-shadow: 0 4px 10px var(--findus-shadow);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.text {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  transition: transform 0.3s ease;
+}
+
+.text:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.mapContainer {
+  margin-top: 2rem;
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px var(--findus-shadow); /* Subtle shadow on the map */
+}
+
+.mapIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+@media (max-width: $media-tablet) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+}

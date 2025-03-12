@@ -1,0 +1,164 @@
+@use "reset" as *;
+@use "resolution" as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fraunces:wght@900&display=swap");
+
+:root {
+  // Definizione delle variabili PRIMA degli annidamenti
+  --background: #f1f1f1;
+  --foreground: #000000;
+
+  /* === Palette Base === */
+  --primary: #24958f;         /* Teal-like green */
+  --accent: #3fbbaf;          /* Minty teal */
+  --background: #e5e7dc;      /* Light grey with a beige tint */
+  --foreground: #11111b;      /* Very dark grey, almost black */
+  --light: #ffffff;           /* Bianco puro */
+  --dark: #11111b;            /* Very dark grey, almost black */
+  --shadow: rgba(0, 0, 0, 0.1); /* Ombra leggera */
+
+  /* === Navbar === */
+  --navbar-bg: var(--accent);
+  --navbar-text: var(--foreground);
+  --navbar-shadow: var(--shadow);
+
+  /* === Hero Section === */
+  --hero-bg: var(--primary); /* Usa solo il colore primario per l'hero */
+  --hero-text: var(--foreground);
+  --hero-button-bg: var(--accent);
+  --hero-button-hover: var(--primary);
+  --hero-button-text: var(--light);
+  --hero-button-shadow: var(--shadow);
+  --hero-scroll-arrow: var(--dark);
+
+  /* === About Us === */
+  --about-bg: var(--background);
+  --about-title: var(--foreground);
+  --about-text: var(--foreground); /* Coerenza con il testo principale */
+
+  /* === Menu === */
+  --menu-title: var(--foreground);
+  --menu-card-bg: var(--light);
+  --menu-card-shadow: var(--shadow);
+  --menu-description: var(--foreground); /* Rimosso colore secondario per i descrittivi */
+  --menu-price: var(--primary);
+  --menu-allergen-bg: var(--light);
+
+  /* === Categoria Lista === */
+  --cats-title: var(--foreground);
+  --cats-card-bg: var(--light);
+  --cats-card-shadow: var(--shadow);
+
+  /* === Servizi === */
+  --services-card-bg: var(--primary);
+  --services-card-text: var(--light);
+  --services-title: var(--foreground);
+  --services-description: var(--foreground);
+
+  /* === Find Us === */
+  --findus-bg-gradient-1: var(--dark); 
+  --findus-bg-gradient-2: var(--primary);
+  --findus-text: var(--light);
+
+  /* === Footer === */
+  --footer-bg: var(--dark);
+  --footer-text: var(--light);
+  --footer-links: var(--light);
+  --footer-links-hover: var(--accent);
+
+  /* === Copyright === */
+  --copyright-bg: rgba(255, 255, 255, 0.1);
+  --copyright-link: var(--accent);
+
+  
+
+  // --grey-muted: #999691;  /* A muted grey */
+  // --light-grey-beige: #e5e7dc;  /* Light grey with a beige tint */
+  // --dark-charcoal: #11111b;  /* A very dark grey, almost black */
+  // --teal-green: #24958f;  /* A teal-like green */
+  // --mint-teal: #3fbbaf;  /* A minty teal */
+
+  --xl-header-fs: 40px;
+  --md-header-fs: 28px;
+  --xs-header-fs: 24px;
+  --lg-body-fs: 16px;
+  --md-body-fs: 15px;
+  --sm-link-fs: 12px;
+
+  --page-margin: 24px;
+  --page-container: 1200px;
+  --media-tablet: $media-tablet;
+  --media-desktop: 1140px;
+
+  // @media (prefers-color-scheme: dark) {
+  //   --background: #0a0a0a;
+  //   --foreground: #ededed;
+  // }
+
+  @media (min-width: $media-tablet) {
+    --xl-header-fs: 48px;
+    --md-header-fs: 32px;
+    --xs-header-fs: 24px;
+    --page-margin: 100px;
+  }
+
+  @media (min-width: 1140px) {
+    --xl-header-fs: 72px;
+    --md-header-fs: 40px;
+    --md-body-fs: 16px;
+    --page-margin: 10px;
+  }
+}
+
+// Global styles
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+span,
+li {
+  //font-family: "Fraunces", serif;
+  font-weight: 900;
+}
+
+p,
+.nav-link,
+a {
+  font-family: "Barlow", sans-serif;
+}
+
+p {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+a {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: var(--dark-greyblue-900);
+  &:hover {
+    font-weight: 700;
+  }
+}

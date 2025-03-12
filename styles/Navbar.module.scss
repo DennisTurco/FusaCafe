@@ -1,0 +1,104 @@
+@use "resolution" as *;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 40px; /* Aumentato il padding sui lati */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--navbar-bg);
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  @media (min-width: $media-tablet) { /* Tablet and larger */
+    margin: 0 auto;
+    padding: 17px 40px;
+  }
+}
+
+.logo {
+  max-width: 50px;
+  max-height: auto;
+  @media (min-width: $media-tablet) {
+    max-width: 50px;
+    max-height: auto;
+  }
+}
+
+.link_container {
+  display: none;
+  @media (min-width: $media-tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 30px;
+  }
+}
+
+.hamburger {
+  display: block;
+  font-size: 30px;
+  @media (min-width: $media-tablet) {
+    display: none;
+  }
+}
+
+.menu_container {
+  position: fixed;
+  top: 15vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 90vh;
+  background-color: var(--navbar-shadow); /* Dark background for menu */
+  display: none; /* Initially hidden */
+
+  &.showMenu {
+    display: block; /* Show when hamburger is clicked */
+  }
+}
+
+.menu_links_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  padding-top: 10vh;
+  background: linear-gradient(0deg, rgba(254, 252, 247, 0) 0%, rgba(254, 252, 247, 1) 100%);
+  
+  a {
+    font-size: 24px;
+    font-family: "Fraunces", serif;
+    font-weight: 900;
+    color: var(--navbar-link);
+    margin-bottom: 32px;
+    transition: color 0.3s ease;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoText {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--navbar-text);
+}
+
+@media (min-width: $media-tablet) { /* Adjust for larger screens */
+  .menu_container {
+    display: none; /* Don't show the menu on large screens */
+  }
+}
