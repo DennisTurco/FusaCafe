@@ -1,14 +1,45 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import styles from "../styles/Why.module.scss";
-import imageUrlBuilder from '@sanity/image-url';
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityClient } from "@sanity/client";
 
+interface WhyRow {
+  title: string;
+  description: string;
+  image: {
+    asset: {
+      _ref?: string;
+      url?: string;
+    };
+  };
+  altText: string;
+}
 
-const WhyCard = ({ title, image, description, altText, client }) => {
+interface WhyData {
+  title: string;
+  description: string;
+  data: WhyRow[];
+}
+
+interface WhyCardProps {
+  title: string;
+  image: {
+    asset: {
+      _ref?: string;
+      url?: string;
+    };
+  };
+  description: string;
+  altText: string;
+  client: SanityClient;
+}
+
+const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, client }) => {
   const builder = imageUrlBuilder(client);
-  const urlFor = (source) => builder.image(source).url();
-  const imageUrl = urlFor(image.asset); // Ottieni la URL dell'immagine dal riferimento
-  
+  const urlFor = (source: any) => builder.image(source).url(); // Tipizziamo `source`
+  const imageUrl = urlFor(image.asset);
+
   return (
     <div className={styles.container}>
       <div className={styles.image_box}>
@@ -21,8 +52,13 @@ const WhyCard = ({ title, image, description, altText, client }) => {
     </div>
   );
 };
+interface WhyProps {
+  whyData: WhyData;
+  fadeIn: Variants;
+  client: SanityClient;
+}
 
-const Why = ({ whyData, fadeIn, client }) => {
+const Why: React.FC<WhyProps> = ({ whyData, fadeIn, client }) => {
   return (
     <motion.section
       className={styles.why_container}
