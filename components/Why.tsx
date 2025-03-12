@@ -37,8 +37,8 @@ interface WhyCardProps {
 
 const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, client }) => {
   const builder = imageUrlBuilder(client);
-  const urlFor = (source: any) => builder.image(source).url(); // Tipizziamo `source`
-  const imageUrl = urlFor(image.asset);
+  const urlFor = (source: { asset: { _ref?: string; url?: string } }) => builder.image(source).url();
+  const imageUrl = urlFor(image);
 
   return (
     <div className={styles.container}>
@@ -52,6 +52,7 @@ const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, c
     </div>
   );
 };
+
 interface WhyProps {
   whyData: WhyData;
   fadeIn: Variants;
