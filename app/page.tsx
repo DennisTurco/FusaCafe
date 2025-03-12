@@ -1,6 +1,6 @@
-'use client';
+'use client'
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import Hero from "../components/HeroHome";
@@ -26,13 +26,18 @@ interface AboutData {
   data: AboutRow[];
 }
 
+interface WhyRow {
+  title: string;
+  description: string;
+}
+
 interface WhyData {
   title: string;
   description: string;
-  data: any; // Se conosci la struttura, tipizzalo meglio
+  data: WhyRow[];
 }
 
-const fadeIn = {
+const fadeIn: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
@@ -51,12 +56,12 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const about: AboutData = await client.fetch(
+        const about = await client.fetch<AboutData>(
           `*[_type == "aboutSection"][0]{ title, description, data[] { title, description, image { asset -> { url } } } }`
         );
         setAboutData(about);
 
-        const why: WhyData = await client.fetch(
+        const why = await client.fetch<WhyData>(
           `*[_type == "whyData"][0]{ title, description, data }`
         );
         setWhyData(why);

@@ -1,5 +1,4 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import styles from "../styles/AboutSection.module.scss";
 
@@ -19,7 +18,7 @@ interface AboutData {
 
 interface AboutSectionProps {
   aboutData: AboutData;
-  fadeIn: any; // Se usi TypeScript rigoroso, puoi migliorare questo tipo
+  fadeIn: Variants;
 }
 
 function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
@@ -39,13 +38,11 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
     >
       {rows.map((row, index) => (
         <div className="flex flex-col md:flex-row gap-6 w-full" key={index}>
-          {/* Colonna testo */}
           <div className={`flex-1 p-4 ${index % 2 === 1 ? "order-last" : ""}`}>
             <h2 className={styles.title}>{row.title}</h2>
             <p className={styles.text}>{row.description}</p>
           </div>
 
-          {/* Colonna immagine */}
           <div className="flex-1 p-4 flex justify-center relative">
             {index === 0 && (
               <div className="absolute top-[-72px] left-1/2 transform -translate-x-1/2">
