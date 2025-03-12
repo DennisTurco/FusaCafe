@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from '../styles/Menu.module.scss';
+import { SanityClient } from "@sanity/client";
 import Image from 'next/image';
 
 // Definizione del tipo di dati
@@ -19,7 +20,11 @@ interface Allergen {
   name: string;
 }
 
-const Menu = ({ client }) => {
+interface CatsSectionProps {
+  client: SanityClient;
+}
+
+const Menu = ({ client }: CatsSectionProps) => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);

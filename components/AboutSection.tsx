@@ -3,7 +3,26 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../styles/AboutSection.module.scss";
 
-function AboutSection({ aboutData, fadeIn }) {
+interface AboutRow {
+  title: string;
+  description: string;
+  image?: {
+    asset?: {
+      url: string;
+    };
+  };
+}
+
+interface AboutData {
+  data: AboutRow[];
+}
+
+interface AboutSectionProps {
+  aboutData: AboutData;
+  fadeIn: any; // Se usi TypeScript rigoroso, puoi migliorare questo tipo
+}
+
+function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
   const rows = aboutData?.data || [];
 
   if (rows.length === 0) {

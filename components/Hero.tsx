@@ -1,4 +1,9 @@
-const Hero = ({imagePath, title}) => {
+interface HeroProps {
+    imagePath: string;
+    title: string;
+}
+
+const Hero = ({imagePath, title}: HeroProps) => {
     return (
         <section
             className="relative w-full h-96 bg-cover bg-center"

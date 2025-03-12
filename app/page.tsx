@@ -1,14 +1,36 @@
-"use client";
+'use client';
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
-import Hero from "../components/Hero4";
+import Hero from "../components/HeroHome";
 import WhySection from "../components/Why";
 import AboutSection from "../components/AboutSection";
 import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
 import sanityClient from "@sanity/client";
+
+interface AboutRow {
+  title: string;
+  description: string;
+  image?: {
+    asset?: {
+      url: string;
+    };
+  };
+}
+
+interface AboutData {
+  title: string;
+  description: string;
+  data: AboutRow[];
+}
+
+interface WhyData {
+  title: string;
+  description: string;
+  data: any; // Se conosci la struttura, tipizzalo meglio
+}
 
 const fadeIn = {
   hidden: { opacity: 0, y: 50 },
@@ -23,17 +45,20 @@ const client = sanityClient({
 });
 
 export default function HomePage() {
-  const [aboutData, setAboutData] = useState(null);
-  const [whyData, setWhyData] = useState(null);
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
+  const [whyData, setWhyData] = useState<WhyData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const about = await client.fetch(`*[_type == "aboutSection"][0]{ title, description, data[] { title, description, image { asset -> { url } } } }`);
-        console.log(about);
+        const about: AboutData = await client.fetch(
+          `*[_type == "aboutSection"][0]{ title, description, data[] { title, description, image { asset -> { url } } } }`
+        );
         setAboutData(about);
 
-        const why = await client.fetch(`*[_type == "whyData"][0]{ title, description, data }`);
+        const why: WhyData = await client.fetch(
+          `*[_type == "whyData"][0]{ title, description, data }`
+        );
         setWhyData(why);
       } catch (error) {
         console.error("Error fetching data from Sanity:", error);
@@ -46,7 +71,7 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
-      
+
       <motion.section initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
         <Hero />
       </motion.section>

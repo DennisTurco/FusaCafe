@@ -1,5 +1,6 @@
 "use client";
 import styles from '../styles/Cats.module.scss';
+import { SanityClient } from "@sanity/client";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
@@ -13,7 +14,11 @@ interface Gatto {
   descrizione?: string;
 }
 
-export default function CatsSection({ client }) {
+interface CatsSectionProps {
+  client: SanityClient;
+}
+
+export default function CatsSection({ client }: CatsSectionProps) {
   const [gatti, setGatti] = useState<Gatto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
