@@ -23,7 +23,7 @@ interface CatsSectionProps {
   client: SanityClient;
 }
 
-export default function Menu({ client }: CatsSectionProps) {
+export default function MenuSection({ client }: CatsSectionProps) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);
