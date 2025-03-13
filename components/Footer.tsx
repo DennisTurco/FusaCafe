@@ -15,8 +15,8 @@ export const Footer = () => {
 
             <div className={styles.links_container}>
                 <Link href="/">HOME</Link>
-                <Link href="/Menu">MENU</Link>
-                <Link href="/Cats">GATTI</Link>
+                <Link href="/menu">MENU</Link>
+                <Link href="/gatti">GATTI</Link>
             </div>
 
             <div className={styles.social_container}>

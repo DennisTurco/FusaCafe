@@ -8,20 +8,20 @@ const allergens: SchemaTypeDefinition = {
       {
         name: 'name',
         title: 'Nome',
+        description: 'Nome dell\'allergene', 
         type: 'string',
-        description: 'Nome dell\'allergene',
       },
       {
         name: 'symbol',
         title: 'Simbolo',
+        description: 'Su Windows è possibile cercare gli emoji da usare come simboli con: tasto windows + .',
         type: 'string',
-        description: 'Emoji o simbolo che rappresenta l\'allergene',
       },
       {
         name: 'description',
         title: 'Descrizione',
+        description: "Questa scritta NON viene visualizzata nel sito, è possibile usare questo campo per inserire delle note",
         type: 'text',
-        description: 'Una breve descrizione dell\'allergene',
       },
     ],
   };

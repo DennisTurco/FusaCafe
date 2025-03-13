@@ -8,13 +8,14 @@ const aboutSection: SchemaTypeDefinition = {
     {
       name: 'title',
       title: 'Titolo',
-      type: 'string', // Per il titolo "Chi Siamo"
+      type: 'string',
+      description: 'Nome generico (NON viene visualizzato nel sito)',
     },
     {
       name: 'description',
       title: 'Descrizione',
-      type: 'text', // Cambiamo in array per permettere più formati di testo
-      description: 'La descrizione formattata della sezione',
+      type: 'text',
+      description: 'Questa scritta NON viene visualizzata nel sito, è possibile usare questo campo per inserire delle note',
     },
     {
       name: 'data', 

@@ -24,10 +24,10 @@ export const HeroSection = () => {
             Un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti.
           </p>
           <div className={styles.buttonsContainer}>
-            <Link href="/Menu">
+            <Link href="/menu">
               <button className={styles.button}>Menu</button>
             </Link>
-            <Link href="/Cats">
+            <Link href="/gatti">
               <button className={styles.button}>Gatti</button>
             </Link>
           </div>
