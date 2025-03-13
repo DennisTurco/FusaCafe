@@ -24,10 +24,31 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne */
-    gap: 0.5rem; /* Riduci lo spazio tra le card */
+    grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Ogni colonna ha una larghezza minima di 300px */
+    gap: 0.5rem;
     margin-top: 2rem;
+    justify-content: center; /* Centrare il contenuto */
 }
+
+.card {
+    background: var(--cats-card-bg);
+    box-shadow: 0 4px 6px var(--cats-card-shadow);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: left;
+    width: 100%; /* Le card occupano tutta la colonna disponibile */
+    max-width: 350px; /* Imposta una larghezza massima uniforme */
+    margin: 0 auto; /* Centrare la card */
+}
+
+.image {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
 
 @media (max-width: $media-tablet) {
     .grid {
@@ -41,25 +62,6 @@
         grid-template-columns: 1fr; /* 1 colonna per schermi molto piccoli */
         gap: 0.5rem; /* Stessa cosa qui, ridotto lo spazio tra le card */
     }
-}
-
-.card {
-    background: var(--cats-card-bg);
-    box-shadow: 0 4px 6px var(--cats-card-shadow);
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: left;
-    max-width: 320px; /* Set a maximum width for the card */
-    margin: 0 auto; /* Center the card inside the grid */
-}
-
-.image {
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
-    max-width: 300px; /* Max width of the image */
-    max-height: 200px; /* Max height of the image */
-    object-fit: cover; /* Ensure the image is cropped and doesn't stretch */
 }
 
 .name {
