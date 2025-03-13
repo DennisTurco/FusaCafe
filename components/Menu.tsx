@@ -62,7 +62,7 @@ const Menu = ({ client }: CatsSectionProps) => {
         setLoading(false);
       })
       .catch(console.error);
-  }, []);
+  }, [client]);
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;

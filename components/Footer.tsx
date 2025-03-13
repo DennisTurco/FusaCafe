@@ -4,13 +4,21 @@ import Copyright from "./Copyright";
 import { RiFacebookCircleLine, RiInstagramLine, RiTwitterLine } from "react-icons/ri";
 import { FaMobileAlt, FaLocationArrow } from "react-icons/fa";
 import styles from "../styles/Footer.module.scss";
+import Image from "next/image";
 
 export const Footer = () => {
     return (
         <footer className={styles.footer}>
             <Link href="/" className="flex flex-col items-center"> 
                 Fusa & Caffè
-                <img src="/images/logo.png" alt="logo" className="max-w-[80px] mb-4" />  
+                <Image 
+                    src="/images/logo.png" 
+                    alt="logo" 
+                    width={80} 
+                    height={80}
+                    className="max-w-[80px] mb-4" 
+                    priority
+                    />
             </Link>
 
             <div className={styles.links_container}>
