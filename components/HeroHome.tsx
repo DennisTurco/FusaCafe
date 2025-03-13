@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { FaMobileAlt } from "react-icons/fa";
-import styles from "../styles/HeroSection.module.scss";
 import { FaChevronDown } from "react-icons/fa";
+import Image from "next/image";
+import styles from "../styles/HeroSection.module.scss";
 
 export const HeroSection = () => {
   return (
@@ -10,7 +11,13 @@ export const HeroSection = () => {
       <div className={styles.heroContent}>
         {/* Aggiungi la gif sopra la scritta principale */}
         <div className={styles.gifContainer}>
-          <img src="/gifs/gattoCaffe.gif" alt="Gatto che beve caffè" className={styles.gifImage} />
+          <Image
+            src="/gifs/gattoCaffe.gif"
+            alt="Gatto che beve caffè"
+            className={styles.gifImage}
+            width={400} 
+            height={400} 
+          />
         </div>
 
         {/* Testo centrato */}

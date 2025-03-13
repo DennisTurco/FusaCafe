@@ -1,5 +1,4 @@
-'use client';
-
+"use client";
 import { useEffect, useState } from 'react';
 import styles from '../styles/Menu.module.scss';
 import { SanityClient } from "@sanity/client";
@@ -24,7 +23,7 @@ interface CatsSectionProps {
   client: SanityClient;
 }
 
-const Menu = ({ client }: CatsSectionProps) => {
+export default function Menu({ client }: CatsSectionProps) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);
@@ -137,5 +136,3 @@ const Menu = ({ client }: CatsSectionProps) => {
     </section>
   );
 };
-
-export default Menu;

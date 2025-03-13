@@ -30,7 +30,7 @@ export default function Cats() {
 
             {/* Menu list */}
             <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
-                <CatsSection client={client} />
+              <CatsSection client={client} />
             </motion.div>
 
             {/* Footer */}
