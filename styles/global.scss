@@ -27,13 +27,13 @@
   --navbar-shadow: var(--shadow);
 
   /* === Hero Section === */
-  --hero-bg: var(--primary); /* Usa solo il colore primario per l'hero */
-  --hero-text: var(--light);
+  --hero-bg: var(--primary);
+  --hero-text: var(--foreground);
   --hero-button-bg: var(--accent);
   --hero-button-hover: var(--primary);
   --hero-button-text: var(--light);
   --hero-button-shadow: var(--shadow);
-  --hero-scroll-arrow: var(--light);
+  --hero-scroll-arrow: var(--dark);
 
   /* === About Us === */
   --about-bg: var(--background);
@@ -42,9 +42,12 @@
 
   /* === Menu === */
   --menu-title: var(--foreground);
+  --menu-description: var(--primary); 
+  --menu-card-title: var(--foreground);
+  --menu-card-subtitle: var(--primary);
   --menu-card-bg: var(--light);
   --menu-card-shadow: var(--shadow);
-  --menu-description: var(--foreground);
+  --menu-card-description: var(--foreground);
   --menu-price: var(--primary);
   --menu-allergen-bg: var(--light);
 

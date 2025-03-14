@@ -74,10 +74,13 @@ export default function CatsSection({ client }: CatsSectionProps) {
                   <div className={styles.noImage}>Immagine non disponibile</div>
                 )}
                 <h3 className={styles.name}>{gatto.nome ?? "Nome non disponibile"}</h3>
+
+                {/* Ritorno alla lista per una formattazione chiara */}
                 <ul className={styles.details}>
                   <li><strong>Sesso:</strong> {gatto.sesso ?? "Non disponibile"}</li>
                   <li><strong>Età:</strong> {gatto.eta ?? "Non disponibile"}</li>
                 </ul>
+
                 <p className={styles.description}>
                   {gatto.descrizione ?? "Nessuna descrizione disponibile."}
                 </p>

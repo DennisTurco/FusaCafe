@@ -4,7 +4,6 @@ import styles from '../styles/Menu.module.scss';
 import { SanityClient } from "@sanity/client";
 import Image from 'next/image';
 
-// Definizione del tipo di dati
 interface MenuItem {
   _key: string;
   name: string;
@@ -19,11 +18,11 @@ interface Allergen {
   name: string;
 }
 
-interface CatsSectionProps {
+interface MenuSectionProps {
   client: SanityClient;
 }
 
-export default function MenuSection({ client }: CatsSectionProps) {
+export default function MenuSection({ client }: MenuSectionProps) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,7 +32,7 @@ export default function MenuSection({ client }: CatsSectionProps) {
   useEffect(() => {
     Promise.all([
       client.fetch(`
-        *[_type == "menuItem"][0]{
+        *[_type == "menuItem"]{
           name,
           description,
           data[] {
@@ -44,7 +43,7 @@ export default function MenuSection({ client }: CatsSectionProps) {
             image{asset->{url}},
             allergens[]->{symbol, name}
           }
-        }
+        }[0]
       `),
       client.fetch(`
         *[_type == "allergen"]{
@@ -77,7 +76,6 @@ export default function MenuSection({ client }: CatsSectionProps) {
         ) : (
           menuItems.map((item) => (
             <div key={item._key} className={styles.menuItem}>
-              {/* Controllo per verificare la presenza immagine */}
               {item.image?.asset?.url ? (
                 <Image
                   src={item.image.asset.url}
@@ -104,7 +102,6 @@ export default function MenuSection({ client }: CatsSectionProps) {
                 <p className={styles.description}>{item.description}</p>
                 <p className={styles.price}>€ {item.price}</p>
               </div>
-              {/* Allergeni */}
               {Array.isArray(item.allergens) && item.allergens.length > 0 && (
                 <div className={styles.allergens}>
                   {item.allergens.map((icon, i) => (
@@ -116,8 +113,6 @@ export default function MenuSection({ client }: CatsSectionProps) {
           ))
         )}
       </div>
-
-      {/* Legenda degli allergeni */}
       <div className={styles.allergenLegend}>
         <h3 className={styles.legendTitle}>Legenda Allergeni</h3>
         <div className={styles.legendItems}>
