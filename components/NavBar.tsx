@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { GrFormClose } from "react-icons/gr";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.scss";
+import ChiamamiButton from "./ChiamamiButton";
 
 export const Navbar: React.FC = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
@@ -25,6 +26,7 @@ export const Navbar: React.FC = () => {
                 <Link href="/"> Home </Link>
                 <Link href="/menu"> Menu </Link>
                 <Link href="/gatti"> Gatti </Link>
+                <ChiamamiButton />
             </div>
 
             {hamburgerClicked ? (
@@ -43,6 +45,7 @@ export const Navbar: React.FC = () => {
                 className={`${styles.menu_container} ${hamburgerClicked ? styles.showMenu : ''}`}
             >
                 <div className={styles.menu_links_container}>
+                    <ChiamamiButton />
                     <Link href="/" onClick={() => setHamburgerClicked(false)}> Home </Link>
                     <Link href="/menu" onClick={() => setHamburgerClicked(false)}> Menu </Link>
                     <Link href="/gatti" onClick={() => setHamburgerClicked(false)}> Gatti </Link>

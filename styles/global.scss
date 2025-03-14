@@ -28,12 +28,12 @@
 
   /* === Hero Section === */
   --hero-bg: var(--primary); /* Usa solo il colore primario per l'hero */
-  --hero-text: var(--foreground);
+  --hero-text: var(--light);
   --hero-button-bg: var(--accent);
   --hero-button-hover: var(--primary);
   --hero-button-text: var(--light);
   --hero-button-shadow: var(--shadow);
-  --hero-scroll-arrow: var(--dark);
+  --hero-scroll-arrow: var(--light);
 
   /* === About Us === */
   --about-bg: var(--background);
@@ -44,12 +44,16 @@
   --menu-title: var(--foreground);
   --menu-card-bg: var(--light);
   --menu-card-shadow: var(--shadow);
-  --menu-description: var(--foreground); /* Rimosso colore secondario per i descrittivi */
+  --menu-description: var(--foreground);
   --menu-price: var(--primary);
   --menu-allergen-bg: var(--light);
 
-  /* === Categoria Lista === */
+  /* === Gatti === */
   --cats-title: var(--foreground);
+  --cats-subtitle: var(--primary); 
+  --cats-card-title: var(--foreground); 
+  --cats-card-subtitle: var(--primary); 
+  --cats-card-desc: var(--foreground); 
   --cats-card-bg: var(--light);
   --cats-card-shadow: var(--shadow);
 
@@ -64,6 +68,11 @@
   --findus-bg-gradient-2: var(--primary);
   --findus-text: var(--light);
 
+  /* == Chiamami Button == */
+  --chiamami-bg: #4CAF50;
+  --chiamami-text: var(--light);
+  --chiamami-bg-hover: #45a049;
+
   /* === Footer === */
   --footer-bg: var(--dark);
   --footer-text: var(--light);
@@ -73,6 +82,7 @@
   /* === Copyright === */
   --copyright-bg: rgba(255, 255, 255, 0.1);
   --copyright-link: var(--accent);
+
 
   
 
