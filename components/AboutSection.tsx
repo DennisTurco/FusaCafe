@@ -52,6 +52,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
                   width={240} 
                   height={192} 
                   className="w-60 h-48"
+                  loading="lazy"
                 />
               </div>
             )}
@@ -63,6 +64,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
                 width={1000}
                 height={650}
                 className="rounded-2xl shadow-lg w-full max-h-[350px]"
+                loading="lazy"
               />
             ) : (
               <div className={styles.imagePlaceholder}>Immagine non disponibile</div>

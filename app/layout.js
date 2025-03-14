@@ -5,12 +5,12 @@ import "/styles/global.scss";
 
 // Definizione dei metadati
 export const metadata = {
-  title: "Fusa & Caffè",
-  description: "Un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti.",
-  keywords: "caffè, template, clienti, business, fusa",
+  title: "Fusa & Caffè - Il Miglior Caffè e Relax con i Gatti",
+  description: "Fusa & Caffè è un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti. Un'esperienza unica nel cuore di Parma.",
+  keywords: "caffè, fusa, gatti, caffetteria, relax, angolo caffè, esperienza caffè, gatti in caffetteria, caffè e animali, Parma",
   author: "Shard",
-  ogTitle: "Fusa & Caffè",
-  ogDescription: "Un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti.",
+  ogTitle: "Fusa & Caffè - Il Miglior Caffè e Relax con i Gatti",
+  ogDescription: "Fusa & Caffè è un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti. Un'esperienza unica nel cuore di Parma.",
   ogImage: "/images/logo.png",
   // twitterCard: "summary_large_image",
   // twitterSite: "@fusa_caffe",
@@ -37,18 +37,35 @@ export default function RootLayout({ children }) {
           <meta property="og:image" content={metadata.ogImage} />
           <meta property="og:type" content="website" />
           
-          {/* Impostazioni della card Twitter */}
-          {/* <meta name="twitter:card" content={metadata.twitterCard} />
-          <meta name="twitter:site" content={metadata.twitterSite} />
-          <meta name="twitter:title" content={metadata.ogTitle} />
-          <meta name="twitter:description" content={metadata.ogDescription} />
-          <meta name="twitter:image" content={metadata.ogImage} /> */}
-
           {/* Meta tag per la viewport */}
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+          {/* Aggiungi il tag canonical per evitare contenuti duplicati */}
+          <link rel="canonical" href="https://www.fusacafe.it" />
+
           {/* Favicon */}
           <link rel="icon" href="/favicon.ico" />
+
+          {/* Schema.org per SEO locale */}
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "http://schema.org",
+                "@type": "CafeOrCoffeeShop",
+                "name": "Fusa & Caffè",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Via D'Azeglio, 72",
+                  "addressLocality": "Parma",
+                  "postalCode": "43125",
+                  "addressCountry": "IT" 
+                },
+                "telephone": "+39 123 456 789",
+                "url": "https://www.fusacafe.it",
+                "image": "https://www.fusacafe.it/images/logo.png"
+              }
+            `}
+          </script>
         </Head>
 
         {/* Rendering del contenuto della pagina */}

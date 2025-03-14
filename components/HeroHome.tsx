@@ -16,6 +16,7 @@ export const HeroSection = () => {
             className={styles.gifImage}
             width={400} 
             height={400} 
+            loading="lazy"
           />
         </div>
 

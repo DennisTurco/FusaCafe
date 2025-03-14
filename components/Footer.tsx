@@ -17,7 +17,7 @@ export const Footer = () => {
                     width={80} 
                     height={80}
                     className="max-w-[80px] mb-4" 
-                    priority
+                    loading="lazy"
                     />
             </Link>
 

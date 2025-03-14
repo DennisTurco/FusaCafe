@@ -1,4 +1,4 @@
-import styles from "/styles/MapsPosition.module.scss";
+import styles from "../styles/MapsPosition.module.scss";
 
 const MapsPosition = () => {
   return (

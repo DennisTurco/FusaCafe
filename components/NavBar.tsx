@@ -17,7 +17,8 @@ export const Navbar: React.FC = () => {
                     alt="logo"
                     width={150} 
                     height={50} 
-                    className={styles.logo} 
+                    className={styles.logo}
+                    priority
                 />
                 <span className={styles.logoText}>Fusa & Caffè</span>
             </Link>
