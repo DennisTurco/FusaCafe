@@ -30,7 +30,6 @@ export const Footer = () => {
             <div className={styles.social_container}>
                 <Link href="/"><RiFacebookCircleLine size={32} className={styles.social_link} /></Link>
                 <Link href="/"><RiInstagramLine size={32} className={styles.social_link} /></Link>
-                <Link href="/"><RiTwitterLine size={32} className={styles.social_link} /></Link>
             </div>
 
             {/* Aggiunta del numero di telefono */}
@@ -42,7 +41,7 @@ export const Footer = () => {
             {/* Aggiunta indirizzo */}
             <div className="flex items-center gap-3 mt-3">
                 <FaLocationArrow size={20} />
-                <p className="text-lg">Massimo D&apos;Azeglio 72/e Parma cap 43125</p>
+                <p className="text-lg">Strada Massimo D&apos;Azeglio 72/E, 43125 Parma</p>
             </div>
 
             <div className={styles.copyright_wrapper}>
