@@ -38,7 +38,7 @@ const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, c
     <div className={styles.container}>
       <div className={styles.image_box}>
         {imageUrl ? (
-          <Image src={imageUrl} alt={altText || "Image"} width={300} height={200} className={styles.image} loading="lazy" />
+          <Image src={imageUrl} alt={altText || "Image"} width={250} height={170} className={styles.image} loading="lazy" />
         ) : (
           <div>No Image Available</div>
         )}

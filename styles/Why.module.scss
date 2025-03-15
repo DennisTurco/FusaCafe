@@ -112,7 +112,7 @@
 }
 
 .image_box {
-  margin-bottom: 56px;
+  margin-bottom: 10px;
   display: flex;            // Aggiungi display flex per centrare l'immagine
   justify-content: center;  // Centra orizzontalmente
   align-items: center;      // Centra verticalmente
@@ -130,8 +130,7 @@
   }
 
   .image {
-    width: 65%; // Imposta la larghezza dell'immagine al 65% del contenitore
-    height: auto; // Mantiene l'aspect ratio dell'immagine
+    width: 40%;
+    height: auto;
   }
 }
-

@@ -26,7 +26,7 @@ export const HeroSection = () => {
           <div className={styles.phoneContainer}>            
           </div>
           <p className={styles.description}>
-            Un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti.
+            Un angolo accogliente dove gustare un buon caffè e rilassarti in compagnia dei nostri gatti.
           </p>
           <div className={styles.buttonsContainer}>
             <Link href="/menu">
