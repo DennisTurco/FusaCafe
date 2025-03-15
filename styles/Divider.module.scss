@@ -1,0 +1,10 @@
+@use "resolution" as *;
+
+.divider {
+  height: 3px;
+  width: 80%;
+  margin: 50px auto;
+  border-radius: 100px;
+  background: linear-gradient(100deg, var(--divider-gradient-1), var(--divider-gradient-2));
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}

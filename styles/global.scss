@@ -86,8 +86,9 @@
   --copyright-bg: rgba(255, 255, 255, 0.1);
   --copyright-link: var(--accent);
 
-
-  
+  /* === Divider === */
+  --divider-gradient-1: var(--primary); 
+  --divider-gradient-2: var(--accent);
 
   // --grey-muted: #999691;  /* A muted grey */
   // --light-grey-beige: #e5e7dc;  /* Light grey with a beige tint */

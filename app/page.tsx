@@ -10,6 +10,7 @@ import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
 import sanityClient from "@sanity/client";
 import { WhyData } from "../components/types";
+import Divider from "../components/Divider";
 
 interface AboutRow {
   title: string;
@@ -30,6 +31,15 @@ interface AboutData {
 const fadeIn: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+const fadeInWithDelay: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, delay: 0.5 } // Aggiunto il ritardo
+  }
 };
 
 const client = sanityClient({
@@ -72,11 +82,19 @@ export default function HomePage() {
         <Hero />
       </motion.section>
 
+      <motion.section initial="hidden" whileInView="visible" variants={fadeInWithDelay} viewport={{ once: true }}>
+        <Divider/>
+      </motion.section>
+
       {aboutData && (
         <motion.section initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
           <AboutSection aboutData={aboutData} fadeIn={fadeIn} />
         </motion.section>
       )}
+
+      <motion.section initial="hidden" whileInView="visible" variants={fadeInWithDelay}viewport={{ once: true }}>
+        <Divider/>
+      </motion.section>
 
       {whyData && (
         <motion.section className={styles.why_container} initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
