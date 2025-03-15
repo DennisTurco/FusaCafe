@@ -8,6 +8,14 @@
   color: var(--services-card-text);
   height: 382px;
   border-radius: 40px;
+  transition: all 0.4s ease-in-out; // Transizione fluida
+
+  &:hover {
+    transform: translateY(-10px) scale(1.05); // Effetto sollevamento e zoom
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); // Ombra elegante
+    background: linear-gradient(135deg, var(--services-bg-gradient-1), var(--services-bg-gradient-2)); // Effetto sfumatura
+    color: white; // Cambia il colore del testo per migliorare il contrasto
+  }
 
   @media (min-width: $media-tablet) {
     flex-direction: row;
@@ -22,6 +30,19 @@
     text-align: center;
     max-height: 382px;
     margin: 0;
+  }
+}
+
+// Effetto sull'immagine dentro la card
+.image_box {
+  .image {
+    width: 40%;
+    height: auto;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &:hover .image {
+    transform: scale(1.1); // Leggero zoom dell'immagine
   }
 }
 
