@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Copyright from "./Copyright";
-import { RiFacebookCircleLine, RiInstagramLine, RiTwitterLine } from "react-icons/ri";
+import { RiFacebookCircleLine, RiInstagramLine } from "react-icons/ri";
 import { FaMobileAlt, FaLocationArrow } from "react-icons/fa";
 import styles from "../styles/Footer.module.scss";
 import Image from "next/image";
