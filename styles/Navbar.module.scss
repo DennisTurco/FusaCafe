@@ -1,10 +1,11 @@
 @use "resolution" as *;
 
 .container {
-  background-image: url('/path/to/your/image.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-image: url('/path/to/your/image.jpg'); /* Aggiungi il percorso dell'immagine */
+  background-size: contain; /* Assicurati che l'immagine non venga zoomata */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
+  background-attachment: scroll; /* Rimuovi 'fixed' su mobile per evitare il comportamento di zoom */
   
   display: flex;
   justify-content: space-between;
@@ -14,16 +15,24 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--navbar-bg); /* Usa il colore dell'navbar definito nella palette */
+  background-color: var(--navbar-bg);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   z-index: 100;
   transition: all 0.3s ease-in-out;
-  
+
   @media (min-width: $media-tablet) {
     padding: 15px 60px;
   }
 }
+
+@media (max-width: $media-tablet) {
+  .container {
+    background-size: cover; /* Torna a 'cover' per schermi più grandi */
+    background-attachment: scroll; /* Su mobile, usa 'scroll' per evitare problemi con 'fixed' */
+  }
+}
+
 
 .logoContainer {
   display: flex;
@@ -148,11 +157,5 @@
 @media (min-width: $media-tablet) {
   .menu_container {
     display: none;
-  }
-}
-
-@media (max-width: $media-tablet) {
-  .container {
-    background-attachment: scroll; /* Cambia da 'fixed' a 'scroll' sui dispositivi mobili */
   }
 }
