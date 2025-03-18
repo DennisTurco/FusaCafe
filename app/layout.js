@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
           
           {/* Descrizione per i motori di ricerca */}
           <meta name="description" content={metadata.description} />
-
+          
           {/* Metadati SEO */}
           <meta name="keywords" content={metadata.keywords} />
           <meta name="author" content={metadata.author} />
