@@ -35,7 +35,7 @@ export const Footer = () => {
             {/* Aggiunta del numero di telefono */}
             <div className="flex items-center gap-3 mt-3">
                 <FaMobileAlt size={20} />
-                <p className="text-lg">+39 1234567890</p>  {/* Modifica il numero con quello reale */}
+                <p className="text-lg">+39 123 456 7890</p>
             </div>
 
             {/* Aggiunta indirizzo */}

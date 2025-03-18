@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
-import Hero from "../components/HeroHome";
+import Hero from "../components/HeroSection2";
 import WhySection from "../components/Why";
 import AboutSection from "../components/AboutSection";
 import styles from "../styles/Home.module.scss";
@@ -82,19 +82,11 @@ export default function HomePage() {
         <Hero />
       </motion.section>
 
-      <motion.section initial="hidden" whileInView="visible" variants={fadeInWithDelay} viewport={{ once: true }}>
-        <Divider/>
-      </motion.section>
-
       {aboutData && (
         <motion.section initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
           <AboutSection aboutData={aboutData} fadeIn={fadeIn} />
         </motion.section>
       )}
-
-      <motion.section initial="hidden" whileInView="visible" variants={fadeInWithDelay}viewport={{ once: true }}>
-        <Divider/>
-      </motion.section>
 
       {whyData && (
         <motion.section className={styles.why_container} initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>

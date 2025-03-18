@@ -1,0 +1,193 @@
+@use "resolution" as *;
+
+.heroSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+    color: white; /* Colore del testo */
+    position: relative;
+  }
+  
+  .heroSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Overlay semitrasparente */
+    z-index: -1;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+  }
+  
+  .ctaWrapper {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button--primary:hover {
+    background-color: rgba(255, 99, 71, 1); /* Cambia il colore quando hover */
+  }
+
+
+
+
+.heroSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--hero-bg-gradient-1), var(--hero-bg-gradient-2)); /* Gradiente di colore */
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 2s ease-out;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+.gifContainer {
+  margin-bottom: 2rem; /* Spazio tra gif e titolo */
+}
+
+.gifImage {
+  width: 100%;
+  max-width: 250px; /* Limita la larghezza della gif */
+  height: auto;
+  object-fit: contain;
+}
+
+.phoneContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  animation: fadeIn 2s ease-out;
+  margin-top: 1rem;
+}
+
+.phone {
+  font-size: 1.3rem;
+  color: var(--hero-text);
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--hero-text);
+  line-height: 1.6;
+  max-width: 600px;
+  animation: fadeIn 2s ease-out;
+}
+
+.buttonsContainer {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.button {
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  background-color: var(--hero-button-bg);
+  color: var(--hero-button-text);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 15px;
+  box-shadow: 0 4px 10px var(--hero-button-shadow);
+}
+
+.button:hover {
+  background-color: var(--hero-button-hover);
+  transform: scale(1.1);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.scrollDown {
+    position: absolute;
+    bottom: 15%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--hero-scroll-arrow);
+    animation: bounce 1s infinite ease-in-out;
+}
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0); /* Inizia al punto di partenza */
+    }
+    50% {
+      transform: translateX(-50%) translateY(15px); /* Muove la freccia verso il basso */
+    }
+  }
+
+@media (max-width: $media-tablet) {
+    .title {
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+  
+    .description {
+      font-size: 1rem;
+    }
+  
+    .button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+    }
+  
+    .scrollDown {
+      bottom: 5%;
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: $media-mobile) {
+    .title {
+      font-size: 2.5rem;
+    }
+  
+    .description {
+      font-size: 0.9rem;
+      margin: 0 10px; /* Più margine per evitare il testo troppo vicino ai bordi */
+    }
+  
+    .button {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+    }
+  
+    .scrollDown {
+      font-size: 1.2rem;
+    }
+  }

@@ -14,8 +14,9 @@
 
   /* === Palette Base === */
   --primary: #24958f;         /* Teal-like green */
-  --accent: #3fbbaf;          /* Minty teal */
+  --accent: #3fbbafce;          /* Minty teal */
   --background: #e5e7dc;      /* Light grey with a beige tint */
+  --background-alternative: #cbcdc3;      /* Light grey with a beige tint */
   --foreground: #11111b;      /* Very dark grey, almost black */
   --light: #ffffff;           /* Bianco puro */
   --dark: #11111b;            /* Very dark grey, almost black */
@@ -33,7 +34,7 @@
   --hero-button-hover: var(--primary);
   --hero-button-text: var(--light);
   --hero-button-shadow: var(--shadow);
-  --hero-scroll-arrow: var(--dark);
+  --hero-scroll-arrow: var(--light);
 
   /* === About Us === */
   --about-bg: var(--background);
@@ -61,6 +62,7 @@
   --cats-card-shadow: var(--shadow);
 
   /* === Servizi === */
+  --services-bg: var(--background-alternative);
   --services-card-bg: var(--primary);
   --services-card-text: var(--light);
   --services-title: var(--foreground);

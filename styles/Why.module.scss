@@ -50,6 +50,7 @@
   position: relative;
   text-align: center;
   padding: 0 44px;
+  background-color: var(--services-bg);  // Aggiungi il background qui
   h2 {
     font-size: var(--md-header-fs);
     margin-bottom: 24px;

@@ -30,7 +30,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
 
   return (
     <motion.section
-      className="max-w-7xl mx-auto py-16 px-6 flex flex-col gap-12"
+      className="max-w-7xl mx-auto py-16 px-6 flex flex-col gap-12 mt-16" // Aggiungi mt-16 per un margine superiore
       initial="hidden"
       whileInView="visible"
       variants={fadeIn}
