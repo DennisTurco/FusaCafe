@@ -1,55 +1,56 @@
 @use "resolution" as *;
 
-.heroSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 20px;
-    color: white; /* Colore del testo */
-    position: relative;
-  }
-  
-  .heroSection::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay semitrasparente */
-    z-index: -1;
-  }
-  
-  .subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-  }
-  
-  .ctaWrapper {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .button--primary:hover {
-    background-color: rgba(255, 99, 71, 1); /* Cambia il colore quando hover */
-  }
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/banner2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
-
-
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+    /* Evita problemi su mobile */
+  }
+}
 
 .heroSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 100px 20px;
+  color: white;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* Overlay semitrasparente */
+  z-index: -1;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.ctaWrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, var(--hero-bg-gradient-1), var(--hero-bg-gradient-2)); /* Gradiente di colore */
-  text-align: center;
-  position: relative;
-  padding: 0 20px;
-  overflow: hidden;
 }
+
 
 .heroContent {
   display: flex;
@@ -62,17 +63,19 @@
 }
 
 .title {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
 
 .gifContainer {
-  margin-bottom: 2rem; /* Spazio tra gif e titolo */
+  margin-bottom: 2rem;
+  /* Spazio tra gif e titolo */
 }
 
 .gifImage {
   width: 100%;
-  max-width: 250px; /* Limita la larghezza della gif */
+  max-width: 250px;
+  /* Limita la larghezza della gif */
   height: auto;
   object-fit: contain;
 }
@@ -134,60 +137,68 @@
 }
 
 .scrollDown {
-    position: absolute;
-    bottom: 15%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    color: var(--hero-scroll-arrow);
-    animation: bounce 1s infinite ease-in-out;
+  position: absolute;
+  bottom: 10%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: var(--hero-scroll-arrow);
+  animation: bounce 1s infinite ease-in-out;
 }
-  
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateX(-50%) translateY(0); /* Inizia al punto di partenza */
-    }
-    50% {
-      transform: translateX(-50%) translateY(15px); /* Muove la freccia verso il basso */
-    }
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+    /* Inizia al punto di partenza */
   }
 
+  50% {
+    transform: translateX(-50%) translateY(15px);
+    /* Muove la freccia verso il basso */
+  }
+}
+
 @media (max-width: $media-tablet) {
-    .title {
-      font-size: 3rem;
-      letter-spacing: 2px;
-    }
-  
-    .description {
-      font-size: 1rem;
-    }
-  
-    .button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-    }
-  
-    .scrollDown {
-      bottom: 5%;
-      font-size: 1.5rem;
-    }
+  .title {
+    font-size: 3rem;
+    letter-spacing: 2px;
   }
-  
-  @media (max-width: $media-mobile) {
-    .title {
-      font-size: 2.5rem;
-    }
-  
-    .description {
-      font-size: 0.9rem;
-      margin: 0 10px; /* Più margine per evitare il testo troppo vicino ai bordi */
-    }
-  
-    .button {
-      padding: 0.7rem 1.2rem;
-      font-size: 0.9rem;
-    }
-  
-    .scrollDown {
-      font-size: 1.2rem;
-    }
+
+  .description {
+    font-size: 1rem;
   }
+
+  .button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .scrollDown {
+    bottom: 15%;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: $media-mobile) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    margin: 0 10px;
+    /* Più margine per evitare il testo troppo vicino ai bordi */
+  }
+
+  .button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .scrollDown {
+    bottom: 20%;
+    /* Ancora più margine per schermi più piccoli */
+    font-size: 1.3rem;
+  }
+}

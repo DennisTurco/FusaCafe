@@ -1,4 +1,3 @@
-// components/HeroSection.tsx
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -11,19 +10,11 @@ const HeroSection = () => {
     AOS.init();
   }, []);
 
-  // Definisci lo stile inline per l'immagine di sfondo
-  const heroSectionStyle = {
-    backgroundImage: 'url("/images/banner2.jpg")', // Inserisci qui il tuo URL immagine
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    height: '100vh', // Altezza della hero section
-    backgroundAttachment: 'fixed', // Effetto parallax
-
-  };
-
   return (
-    <section className={styles.heroSection} style={heroSectionStyle}>
+    <section className={styles.heroSection}>
+      {/* Div separato per lo sfondo */}
+      <div className={styles.heroBackground}></div>
+
       <h1
         data-aos="slide-up"
         data-aos-offset="120"
@@ -45,8 +36,8 @@ const HeroSection = () => {
         data-aos-once="true"
         className={styles.subtitle}
       >
-            Un angolo accogliente dove gustare un buon caffè e rilassarti in compagnia dei nostri gatti.
-            </div>
+        Un angolo accogliente dove gustare un buon caffè e rilassarti in compagnia dei nostri gatti.
+      </div>
 
       <div className={styles.ctaWrapper}>
         <span
@@ -59,10 +50,10 @@ const HeroSection = () => {
         >
           <Link href="/menu">
             <button className={styles.button}>Menu</button>
-        </Link>
-        <Link href="/gatti">
+          </Link>
+          <Link href="/gatti">
             <button className={styles.button}>Gatti</button>
-        </Link>
+          </Link>
         </span>
       </div>
 
