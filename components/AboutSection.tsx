@@ -53,6 +53,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
                   height={192} 
                   className="w-60 h-48"
                   loading="lazy"
+                  unoptimized
                 />
               </div>
             )}

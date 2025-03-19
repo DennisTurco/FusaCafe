@@ -17,8 +17,10 @@ export const metadata: Metadata = {
     url: "https://www.fusacafe.it",
     type: "website",
   },
-  viewport: "width=device-width, initial-scale=1.0",
 };
+
+// Define the viewport separately
+export const viewport = "width=device-width, initial-scale=1.0";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -68,6 +70,3 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-
-
-{/* TODO: fixare i link di facebook e instagram */}
