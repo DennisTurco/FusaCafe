@@ -30,22 +30,24 @@ export const Navbar: React.FC = () => {
                 <ChiamamiButton />
             </div>
 
-            {hamburgerClicked ? (
-                <GrFormClose
-                    className={styles.hamburger}
-                    onClick={() => setHamburgerClicked(!hamburgerClicked)}
-                />
-            ) : (
+            {!hamburgerClicked ? (
                 <GiHamburgerMenu
                     className={styles.hamburger}
-                    onClick={() => setHamburgerClicked(!hamburgerClicked)}
+                    onClick={() => setHamburgerClicked(true)}
                 />
-            )}
+            ) : null}
 
             <div
                 className={`${styles.menu_container} ${hamburgerClicked ? styles.showMenu : ''}`}
+                onClick={() => setHamburgerClicked(false)} // Chiude il menu al click fuori
             >
-                <div className={styles.menu_links_container}>
+                {/* Icona di chiusura dentro il menu per essere visibile */}
+                <GrFormClose
+                    className={styles.closeIcon}
+                    onClick={() => setHamburgerClicked(false)}
+                />
+
+                <div className={styles.menu_links_container} onClick={(e) => e.stopPropagation()}>
                     <ChiamamiButton />
                     <Link href="/" onClick={() => setHamburgerClicked(false)}> Home </Link>
                     <Link href="/menu" onClick={() => setHamburgerClicked(false)}> Menu </Link>

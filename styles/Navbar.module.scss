@@ -112,28 +112,6 @@
   }
 }
 
-.menu_container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-100%);
-  transition: all 0.4s ease-in-out;
-
-  &.showMenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-}
-
 .menu_links_container {
   display: flex;
   flex-direction: column;
@@ -157,5 +135,45 @@
 @media (min-width: $media-tablet) {
   .menu_container {
     display: none;
+  }
+}
+
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 50px; /* Più grande */
+  color: var(--light); /* Colore bianco */
+  cursor: pointer;
+  z-index: 1100; /* Assicura che sia sopra lo sfondo */
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  &:hover {
+      transform: scale(1.2);
+      color: var(--primary); /* Cambia colore al passaggio */
+  }
+}
+
+.menu_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9); /* Sfondo più scuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: all 0.4s ease-in-out;
+  z-index: 1000; /* Il menu è sotto l'icona di chiusura */
+
+  &.showMenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
   }
 }
