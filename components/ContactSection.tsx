@@ -1,5 +1,5 @@
 import { useState } from "react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { FaMobileAlt, FaLocationArrow, FaEnvelope } from "react-icons/fa";
 import styles from "../styles/ContactSection.module.scss";
 
@@ -159,10 +159,10 @@ const ContactForm = () => {
                 {/* Informazioni di contatto */}
                 <div className={styles.contactInfo}>
                     <h2 className={styles.contactTitle}>Informazioni di contatto</h2>
-                    <p><FaEnvelope size={15} /> <div className={styles.contactInfoValue}> <a href="mailto:fusacafe@gmail.com">fusacafe@gmail.com</a> </div></p>
-                    <p><FaMobileAlt size={15} /> <div className={styles.contactInfoValue}> +39 123 456 7890 </div></p>
-                    <p><FaLocationArrow size={15} /> <div className={styles.contactInfoValue}> Strada Massimo D&apos;Azeglio 72/e, Parma</div></p>
-                    <br/>
+                    <p><FaEnvelope size={15} /> <span className={styles.contactInfoValue}> <a href="mailto:fusacafe@gmail.com">fusacafe@gmail.com</a> </span></p>
+                    <p><FaMobileAlt size={15} /> <span className={styles.contactInfoValue}> +39 123 456 7890 </span></p>
+                    <p><FaLocationArrow size={15} /> <span className={styles.contactInfoValue}> Strada Massimo D&apos;Azeglio 72/e, Parma</span></p>
+                    <br />
                     <h3>Orari</h3>
                     <ul>
                         <li>Lunedì: 9:00 - 22:00</li>
