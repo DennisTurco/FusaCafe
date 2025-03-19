@@ -51,21 +51,20 @@ const ContactForm = () => {
         const form = e.target as HTMLFormElement;
     
         try {
-            // Invia l'email tramite EmailJS
             const result = await emailjs.sendForm(
                 serviceId,  // Service ID
                 templateId, // Template ID
                 form,       // Passiamo la form castata correttamente
                 userId      // User ID
             );
-    
+        
             if (result.status === 200) {
                 setFormStatus({
                     success: true,
                     errorMessage: null,
                     isSubmitting: false,
                 });
-    
+        
                 // Reset del modulo dopo l'invio
                 setFormData({
                     name: "",
@@ -76,7 +75,7 @@ const ContactForm = () => {
             } else {
                 throw new Error("Errore nell'invio dell'email.");
             }
-        } catch (error) {
+        } catch {
             setFormStatus({
                 success: false,
                 errorMessage: "Si è verificato un errore. Riprova più tardi.",
