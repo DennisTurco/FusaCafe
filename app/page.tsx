@@ -10,6 +10,7 @@ import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
 import sanityClient from "@sanity/client";
 import { WhyData } from "../components/types";
+import ContactSection from "../components/ContactSection";
 
 interface AboutRow {
   title: string;
@@ -94,10 +95,15 @@ export default function HomePage() {
       )}
 
       <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
-        <MapsPosition />
+        <ContactSection />
       </motion.div>
 
-      <Footer />
+      <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
+        <MapsPosition />
+        <Footer />
+      </motion.div>
+
+      
     </div>
   );
 }

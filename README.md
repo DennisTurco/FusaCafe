@@ -9,4 +9,7 @@ npm run dev
 ```
 
 * Packages To install:
-`npm install next-sitemap`
+    * `npm install next-sitemap`
+    * `npm install @emailjs/browser`
+    * `npm install react-hook-form`
+    * `npm install emailjs-com`

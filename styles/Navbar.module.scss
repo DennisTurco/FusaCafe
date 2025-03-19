@@ -1,7 +1,6 @@
 @use "resolution" as *;
 
 .container {
-  background-image: url('/path/to/your/image.jpg'); /* Aggiungi il percorso dell'immagine */
   background-size: contain; /* Assicurati che l'immagine non venga zoomata */
   background-position: center; /* Centra l'immagine */
   background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
@@ -47,7 +46,7 @@
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.25);
   }
 }
 

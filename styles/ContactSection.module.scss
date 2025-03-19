@@ -1,0 +1,164 @@
+.contactSection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-color: var(--background); /* Fondo chiaro */
+}
+
+.contactContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+}
+
+.contactContainer,
+.contactInfo {
+    width: 48%;
+    background-color: var(--light); /* Sfondo chiaro per contrastare il background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow); /* Ombra leggera */
+    padding: 40px;
+    transition: transform 0.3s ease;
+}
+
+.contactContainer:hover,
+.contactInfo:hover {
+    transform: translateY(-5px); /* Effetto hover */
+}
+
+.contactTitle {
+    font-size: 32px;
+    color: var(--primary); /* Colore primario per il titolo */
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.contactText {
+    font-size: 18px;
+    color: var(--foreground); /* Colore scuro per il testo */
+    margin-bottom: 30px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.formLabel {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--foreground); /* Colore scuro per le etichette */
+    margin-bottom: 5px;
+}
+
+.inputField,
+.textareaField {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--foreground); /* Colore scuro per il testo nei campi */
+    margin-top: 5px;
+}
+
+.textareaField {
+    height: 150px;
+    resize: vertical;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary); /* Colore primario per il bottone */
+    color: var(--light);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submitButton:hover {
+    background-color: var(--accent); /* Colore accentato al passaggio del mouse */
+}
+
+.contactInfo {
+    background-color: var(--light); /* Sfondo chiaro per la sezione info */
+    box-shadow: 0 4px 10px var(--shadow); /* Ombra leggera */
+}
+
+.contactInfo h3 {
+    font-size: 28px;
+    color: var(--primary); /* Colore primario per il titolo */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.contactInfo p {
+    font-size: 16px;
+    color: var(--foreground); /* Colore scuro per il testo */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center; /* Allinea verticalmente il testo e l'icona */
+    margin: 5px 0; /* Aggiungi un po' di spazio tra le righe */
+}
+
+.contactInfo a {
+    color: var(--primary); /* Colore primario per i link */
+    text-decoration: none;
+    margin-left: 5px; /* Distanza tra l'icona e il link */
+
+}
+
+.contactInfo a:hover {
+    text-decoration: underline;
+}
+
+.contactInfo h4 {
+    font-size: 20px;
+    color: var(--foreground); /* Colore scuro per il sottotitolo */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.contactInfo ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contactInfo li {
+    font-size: 16px;
+    color: var(--foreground); /* Colore scuro per le voci della lista */
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.contactInfo li:before {
+    content: "•"; /* Punto per la lista */
+    color: var(--primary); /* Colore primario per i punti */
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+@media (max-width: 768px) {
+    .contactContent {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contactContainer,
+    .contactInfo {
+        width: 100%;
+    }
+}
+
+.contactInfoValue {
+    margin-left: 10px;
+}

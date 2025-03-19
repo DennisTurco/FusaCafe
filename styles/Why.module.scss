@@ -6,7 +6,7 @@
   margin-bottom: 24px;
   background-color: var(--services-card-bg);
   color: var(--services-card-text);
-  height: 382px;
+  height: 400px;
   border-radius: 40px;
   transition: all 0.4s ease-in-out; // Transizione fluida
 
@@ -28,8 +28,8 @@
   @media (min-width: $media-desktop) {
     @include flex-column-center;
     text-align: center;
-    max-height: 382px;
-    margin: 0;
+    max-height: 400px;
+    margin-bottom: 60px;
   }
 }
 
