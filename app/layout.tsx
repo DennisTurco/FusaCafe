@@ -1,11 +1,10 @@
-import { GeistSans } from 'geist/font/sans';
+import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/react";
-import { Metadata } from 'next';
+import Script from "next/script";
 import "/styles/global.scss";
-import Head from 'next/head';
 
 // Definizione dei metadati
-export const metadata: Metadata = {
+export const metadata = {
   title: "Fusa & Caffè | Cat Café a Parma - Relax e Caffè con i Gatti",
   description: "Scopri Fusa & Caffè, il primo Cat Café di Parma! Un luogo unico dove gustare un ottimo caffè in compagnia dei nostri gatti. Vieni a trovarci!",
   keywords: "caffè, fusa, gatti, caffetteria, relax, angolo caffè, esperienza caffè, gatti in caffetteria, caffè e animali, Parma",
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Define the viewport separately
+// Viewport meta tag
 export const viewport = "width=device-width, initial-scale=1.0";
 
 interface RootLayoutProps {
@@ -51,20 +50,33 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="it">
+      <head>
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+
+        {/* Google Analytics */}
+        <Script async strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+      </head>
       <body className={GeistSans.className} suppressHydrationWarning={true}>
-        {/* Head for setting the favicon and structured data */}
-        <Head>
-          <link rel="icon" href="/favicon.ico" />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        </Head>
-
-        {/* Rendering the page content */}
         {children}
-
-        {/* Vercel Analytics integration */}
+        {/* Vercel Analytics */}
         <Analytics />
       </body>
     </html>
