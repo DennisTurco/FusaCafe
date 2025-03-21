@@ -159,8 +159,8 @@ const ContactForm = () => {
                 {/* Informazioni di contatto */}
                 <div className={styles.contactInfo}>
                     <h2 className={styles.contactTitle}>Informazioni di contatto</h2>
-                    <p><FaEnvelope size={15} /> <span className={styles.contactInfoValue}> <a href="mailto:fusacafe@gmail.com">fusacafe@gmail.com</a> </span></p>
-                    <p><FaMobileAlt size={15} /> <span className={styles.contactInfoValue}> +39 123 456 7890 </span></p>
+                    <p><FaEnvelope size={15} /> <span className={styles.contactInfoValue}> <a href="mailto:fusacafewebsite@gmail.com">fusacafewebsite@gmail.com</a> </span></p>
+                    <p><FaMobileAlt size={15} /> <span className={styles.contactInfoValue}> +39 333 457 3213 </span></p>
                     <p><FaLocationArrow size={15} /> <span className={styles.contactInfoValue}> Strada Massimo D&apos;Azeglio 72/e, Parma</span></p>
                     <br />
                     <h3>Orari</h3>

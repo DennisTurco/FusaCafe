@@ -28,14 +28,14 @@ export const Footer = () => {
             </div>
 
             <div className={styles.social_container}>
-                <Link href="/"><RiFacebookCircleLine size={32} className={styles.social_link} /></Link>
-                <Link href="/"><RiInstagramLine size={32} className={styles.social_link} /></Link>
+                <Link href="https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr"><RiFacebookCircleLine size={32} className={styles.social_link} /></Link>
+                <Link href="https://www.instagram.com/fusa_e_caffe/"><RiInstagramLine size={32} className={styles.social_link} /></Link>
             </div>
 
             {/* Aggiunta del numero di telefono */}
             <div className="flex items-center gap-3 mt-3">
                 <FaMobileAlt size={20} />
-                <p className="text-lg">+39 123 456 7890</p>
+                <p className="text-lg">+39 333 457 3213</p>
             </div>
 
             {/* Aggiunta indirizzo */}

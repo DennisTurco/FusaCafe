@@ -41,10 +41,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       "postalCode": "43125",
       "addressCountry": "IT",
     },
-    "telephone": "+39 123 456 7890",
+    "telephone": "+39 333 457 3213",
     "sameAs": [
-      "https://www.instagram.com/fusacafe_official",
-      "https://www.facebook.com/fusacafeofficial",
+      "https://www.instagram.com/fusa_e_caffe/",
+      "https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr",
     ],
   };
 
