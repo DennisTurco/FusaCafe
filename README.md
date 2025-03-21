@@ -13,3 +13,4 @@ npm run dev
     * `npm install @emailjs/browser`
     * `npm install react-hook-form`
     * `npm install emailjs-com`
+    * `npm i @vercel/speed-insights`
