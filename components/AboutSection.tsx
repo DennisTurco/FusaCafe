@@ -44,7 +44,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
           </div>
 
           <div className="flex-1 p-4 flex justify-center relative">
-            {index === 0 && (
+            {/* {index === 0 && (
               <div className="absolute top-[-72px] left-1/2 transform -translate-x-1/2">
                 <Image
                   src="/gifs/catAnim.gif" 
@@ -56,7 +56,7 @@ function AboutSection({ aboutData, fadeIn }: AboutSectionProps) {
                   unoptimized
                 />
               </div>
-            )}
+            )} */}
 
             {row.image?.asset?.url ? (
               <Image
