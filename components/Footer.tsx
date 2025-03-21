@@ -28,8 +28,8 @@ export const Footer = () => {
             </div>
 
             <div className={styles.social_container}>
-                <Link href="https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr"><RiFacebookCircleLine size={32} className={styles.social_link} /></Link>
-                <Link href="https://www.instagram.com/fusa_e_caffe/"><RiInstagramLine size={32} className={styles.social_link} /></Link>
+                <Link href="https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr" target="blank"><RiFacebookCircleLine size={32} className={styles.social_link} /></Link>
+                <Link href="https://www.instagram.com/fusa_e_caffe/" target="blank"><RiInstagramLine size={32} className={styles.social_link} /></Link>
             </div>
 
             {/* Aggiunta del numero di telefono */}
