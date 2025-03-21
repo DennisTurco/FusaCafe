@@ -88,7 +88,7 @@ export default function MenuSection({ client }: MenuSectionProps) {
               ) : (
                 <div className={styles.imagePlaceholder}>
                   <Image
-                    src="/images/NoImage.png"
+                    src="/images/NoImage.webp"
                     alt={item.name}
                     width={300}
                     height={200}

@@ -26,7 +26,7 @@ export default function Cats() {
             <div><Navbar /></div>
 
             {/* Hero Section */}
-            <section><Hero imagePath={'/images/catsBanner.jpg'} title={""} /></section>
+            <section><Hero imagePath={'/images/catsBanner.webp'} title={""} /></section>
 
             {/* Menu list */}
             <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>

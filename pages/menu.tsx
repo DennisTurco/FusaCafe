@@ -26,7 +26,7 @@ export default function Menu() {
             <div><Navbar /></div>
 
             {/* Hero Section */}
-            <section><Hero imagePath={'/images/menuBanner.jpg'} title={""} /></section>
+            <section><Hero imagePath={'/images/menuBanner.webp'} title={""} /></section>
 
             {/* Menu list */}
             <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>

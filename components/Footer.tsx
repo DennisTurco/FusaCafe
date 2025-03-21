@@ -12,7 +12,7 @@ export const Footer = () => {
             <Link href="/" className="flex flex-col items-center"> 
                 Fusa & Caffè
                 <Image 
-                    src="/images/logo.png" 
+                    src="/images/logo.webp" 
                     alt="logo" 
                     width={80} 
                     height={80}

@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
         <header className={styles.container}>
             <Link href="/" className={styles.logoContainer}>
                 <Image 
-                    src="/images/logo.png" 
+                    src="/images/logo.webp" 
                     alt="logo"
                     width={150} 
                     height={50} 

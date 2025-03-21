@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 // import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 import Script from "next/script";
 import "/styles/global.scss";
 
@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: "Fusa & Caffè - Relax e Caffè con i Gatti",
     description: "Fusa & Caffè è un angolo accogliente dove gustare il miglior caffè e rilassarti in compagnia dei nostri gatti. Un'esperienza unica nel cuore di Parma.",
-    images: [{ url: "https://www.fusacafe.it/images/logo.png" }],
+    images: [{ url: "https://www.fusacafe.it/images/logo.webp" }],
     url: "https://www.fusacafe.it",
     type: "website",
   },
@@ -32,8 +32,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     "@type": "CafeOrCoffeeShop",
     "name": "Fusa & Caffè",
     "url": "https://www.fusacafe.it",
-    "logo": "https://www.fusacafe.it/images/logo.png",
-    "image": "https://www.fusacafe.it/images/banner3.jpg",
+    "logo": "https://www.fusacafe.it/images/logo.webp",
+    "image": "https://www.fusacafe.it/images/banner3.webp",
     "description": "Un angolo accogliente per gustare caffè in compagnia di gatti a Parma.",
     "address": {
       "@type": "PostalAddress",
@@ -81,7 +81,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/*<Analytics />*/}
 
         {/* Vercel Speed insight */}
-        <SpeedInsights/>
+        {/*<SpeedInsights/>*/}
       </body>
     </html>
   );

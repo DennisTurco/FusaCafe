@@ -3,7 +3,7 @@ export default function sitemap() {
     {
       url: 'https://www.fusacafe.it',  // URL del sito principale
       lastModified: new Date(),
-      changeFrequency: 'daily',         // Frequenza di aggiornamento per la homepage
+      changeFrequency: 'monthly',         // Frequenza di aggiornamento per la homepage
       priority: 1.0,                   // Priorità alta per la homepage
     },
     {
