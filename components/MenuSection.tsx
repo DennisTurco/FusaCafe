@@ -83,7 +83,7 @@ export default function MenuSection({ client }: MenuSectionProps) {
                   width={300}
                   height={200}
                   className={styles.image}
-                  priority
+                  loading="lazy"
                 />
               ) : (
                 <div className={styles.imagePlaceholder}>
@@ -93,7 +93,7 @@ export default function MenuSection({ client }: MenuSectionProps) {
                     width={300}
                     height={200}
                     className={styles.image}
-                    priority
+                    loading="lazy"
                   />
                 </div>
               )}

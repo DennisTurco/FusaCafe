@@ -69,7 +69,7 @@ export default function CatsSection({ client }: CatsSectionProps) {
                     height={200}
                     alt={gatto.nome || "Gatto senza nome"}
                     className={styles.image}
-                    priority
+                    loading="lazy"
                   />
                 ) : (
                   <div className={styles.noImage}>Immagine non disponibile</div>

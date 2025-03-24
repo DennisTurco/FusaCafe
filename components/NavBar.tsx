@@ -18,7 +18,7 @@ export const Navbar: React.FC = () => {
                     width={150} 
                     height={50} 
                     className={styles.logo}
-                    priority
+                    loading="lazy"
                 />
                 <span className={styles.logoText}>Fusa & Caffè</span>
             </Link>
