@@ -165,13 +165,13 @@ const ContactForm = () => {
                     <br />
                     <h3>Orari</h3>
                     <ul>
-                        <li>Lunedì: 9:00 - 22:00</li>
-                        <li>Martedì: 9:00 - 22:00</li>
-                        <li>Mercoledì: 9:00 - 22:00</li>
-                        <li>Giovedì: 9:00 - 22:00</li>
-                        <li>Venerdì: 9:00 - 22:00</li>
-                        <li>Sabato: 9:00 - 18:00</li>
-                        <li>Domenica: 9:00 - 12:00</li>
+                        <li>Lunedì: Chiuso</li>
+                        <li>Martedì: 8:00 - 20:00</li>
+                        <li>Mercoledì: 8:00 - 20:00</li>
+                        <li>Giovedì: 8:00 - 20:00</li>
+                        <li>Venerdì: 8:00 - 20:00</li>
+                        <li>Sabato: 8:00 - 20:00</li>
+                        <li>Domenica: 9:00 - 20:00</li>
                     </ul>
                 </div>
             </div>
