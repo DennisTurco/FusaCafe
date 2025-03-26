@@ -1,0 +1,59 @@
+{
+    "headers": [
+      {
+        "source": "/api/menu",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, s-maxage=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/api/gatti",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, s-maxage=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/menu",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/gatti",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/app/pages",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, stale-while-revalidate=86400"
+          }
+        ]
+      }
+    ]
+  }
+  

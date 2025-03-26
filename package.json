@@ -27,7 +27,8 @@
     "react-icons": "^5.5.0",
     "sanity": "^3.79.0",
     "sass": "^1.85.1",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.15",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

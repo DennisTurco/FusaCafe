@@ -1,8 +1,15 @@
 "use client";
 import { useEffect, useState } from 'react';
 import styles from '../styles/Menu.module.scss';
-import { SanityClient } from "@sanity/client";
+import { createClient } from "@sanity/client";
 import Image from 'next/image';
+
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: "2024-03-10",
+  useCdn: true,
+});
 
 interface MenuItem {
   _key: string;
@@ -18,11 +25,7 @@ interface Allergen {
   name: string;
 }
 
-interface MenuSectionProps {
-  client: SanityClient;
-}
-
-export default function MenuSection({ client }: MenuSectionProps) {
+export default function MenuSection() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);

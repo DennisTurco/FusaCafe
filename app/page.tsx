@@ -8,7 +8,7 @@ import WhySection from "../components/Why";
 import AboutSection from "../components/AboutSection";
 import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 import { WhyData } from "../components/types";
 import ContactSection from "../components/ContactSection";
 
@@ -33,19 +33,10 @@ const fadeIn: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-// const fadeInWithDelay: Variants = {
-//   hidden: { opacity: 0, y: 10 },
-//   visible: { 
-//     opacity: 1, 
-//     y: 0, 
-//     transition: { duration: 0.8, delay: 0.5 } // Aggiunto il ritardo
-//   }
-// };
-
-const client = sanityClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: '2024-03-10',
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: "2024-03-10",
   useCdn: true,
 });
 
@@ -64,7 +55,6 @@ export default function HomePage() {
         const why = await client.fetch<WhyData>(
           `*[_type == "whyData"][0]{ title, description, data }`
         );
-        console.log("Fetched whyData: ", why);  // Log to check the structure of whyData
         setWhyData(why);
       } catch (error) {
         console.error("Error fetching data from Sanity:", error);
