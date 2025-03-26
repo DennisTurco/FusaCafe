@@ -17,17 +17,10 @@ interface MenuItem {
   description: string;
   price: string;
   image?: { asset: { url: string } } | null;
-  allergens: { symbol: string; name: string }[];
-}
-
-interface Allergen {
-  symbol: string;
-  name: string;
 }
 
 export default function MenuSection() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [allergensData, setAllergensData] = useState<Allergen[]>([]);
   const [loading, setLoading] = useState(true);
   const [menuName, setMenuName] = useState('');
   const [menuDescription, setMenuDescription] = useState('');
@@ -43,23 +36,15 @@ export default function MenuSection() {
             name,
             description,
             price,
-            image{asset->{url}},
-            allergens[]->{symbol, name}
+            image{asset->{url}}
           }
         }[0]
       `),
-      client.fetch(`
-        *[_type == "allergen"]{
-          symbol,
-          name
-        }
-      `),
     ])
-      .then(([menuData, allergensData]) => {
+      .then(([menuData]) => {
         setMenuName(menuData?.name || 'Menu Non Disponibile');
         setMenuDescription(menuData?.description || 'Descrizione non disponibile');
         setMenuItems(menuData?.data || []);
-        setAllergensData(allergensData);
         setLoading(false);
       })
       .catch(console.error);
@@ -105,31 +90,9 @@ export default function MenuSection() {
                 <p className={styles.description}>{item.description}</p>
                 <p className={styles.price}>€ {item.price}</p>
               </div>
-              {Array.isArray(item.allergens) && item.allergens.length > 0 && (
-                <div className={styles.allergens}>
-                  {item.allergens.map((icon, i) => (
-                    <span key={i}>{icon.symbol} </span>
-                  ))}
-                </div>
-              )}
             </div>
           ))
         )}
-      </div>
-      <div className={styles.allergenLegend}>
-        <h3 className={styles.legendTitle}>Legenda Allergeni</h3>
-        <div className={styles.legendItems}>
-          {allergensData.length === 0 ? (
-            <p>Nessun allergene disponibile</p>
-          ) : (
-            allergensData.map((allergen, index) => (
-              <div key={index} className={styles.legendItem}>
-                <span>{allergen.symbol}</span>
-                <p>{allergen.name}</p>
-              </div>
-            ))
-          )}
-        </div>
       </div>
     </section>
   );

@@ -50,18 +50,6 @@ const menu: SchemaTypeDefinition = {
               options: { hotspot: true },
               description: 'Immagine del piatto',
             },
-            {
-              name: 'allergens',
-              title: 'Allergeni',
-              type: 'array',
-              of: [
-                {
-                  type: 'reference',
-                  to: [{ type: 'allergen' }], // Referenza ai documenti allergeni
-                },
-              ],
-              description: 'Lista degli allergeni del piatto',
-            },
           ],
         },
       ],
@@ -75,37 +63,31 @@ const menu: SchemaTypeDefinition = {
         name: 'Caffè Espresso',
         description: 'Un classico espresso italiano, intenso e aromatico.',
         price: '1.50',
-        allergens: [],
       },
       {
         name: 'Cappuccino',
         description: 'Espresso con latte montato a vapore e un tocco di cacao.',
         price: '2.50',
-        allergens: [],
       },
       {
         name: 'Latte Macchiato',
         description: 'Latte caldo con un delicato strato di espresso.',
         price: '3.00',
-        allergens: [],
       },
       {
         name: 'Tè Verde',
         description: 'Tè verde biologico con note erbacee e rilassanti.',
         price: '2.00',
-        allergens: [],
       },
       {
         name: 'Cornetto alla Crema',
         description: 'Cornetto sfogliato ripieno di crema pasticcera.',
         price: '1.80',
-        allergens: [],
       },
       {
         name: 'Torta al Cioccolato',
         description: 'Morbida torta al cioccolato con cuore fondente.',
         price: '3.50',
-        allergens: [],
       },
     ],
   },
