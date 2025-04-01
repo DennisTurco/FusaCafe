@@ -7,7 +7,7 @@ const Regolamento = () => {
         <h2 className={styles.title}><FaPaw size={20} />Regolamento della Casa</h2>
         <p className={styles.subtitle}>Per il benessere di tutti, seguiamo queste semplici regole:</p>
         <ul className={styles.rulesList}>
-          <li>Igienizzate le mani all'ingresso.</li>
+          <li>Igienizzate le mani all&apos;ingresso.</li>
           <li>Se siete in gruppo, il tempo massimo di permanenza è di 50 minuti.</li>
           <li>Se volete fermarvi a studiare o lavorare più a lungo, informate il personale.</li>
           <li>Aiutateci a mantenere un ambiente sereno: evitate schiamazzi e movimenti bruschi.</li>
