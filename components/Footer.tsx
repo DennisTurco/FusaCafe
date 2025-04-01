@@ -48,19 +48,21 @@ export const Footer = () => {
 
             <div className="flex flex-wrap justify-center items-center gap-8 mt-6">
                 <a href="https://www.caffevergnano.com" target="_blank" rel="noopener noreferrer">
-                    <img 
+                    <Image 
                         src="https://caffevergnano-static.kxscdn.com/wp-content/uploads/2021/04/logo_vergnano.png" 
                         alt="Caffè Vergnano" 
+                        width={160}  // Adjust width as needed
+                        height={64}  // Adjust height as needed
                         className="h-12 md:h-16 transition-transform hover:scale-110"
-                        loading="lazy"
                     />
                 </a>
                 <a href="https://www.exclusion.it" target="_blank" rel="noopener noreferrer">
-                    <img 
+                    <Image 
                         src="https://exclusion.it/wp-content/uploads/2017/07/exclusion_logo_bianco.png" 
                         alt="Exclusion Pet Food" 
+                        width={160}  
+                        height={64}  
                         className="h-12 md:h-16 transition-transform hover:scale-110"
-                        loading="lazy"
                     />
                 </a>
             </div>
