@@ -8,6 +8,7 @@ import WhySection from "../components/Why";
 import AboutSection from "../components/AboutSection";
 import styles from "../styles/Home.module.scss";
 import MapsPosition from "../components/MapsPosition";
+import Regolamento from "../components/Regolamento";
 import { createClient } from "@sanity/client";
 import { WhyData } from "../components/types";
 import ContactSection from "../components/ContactSection";
@@ -83,6 +84,10 @@ export default function HomePage() {
           <WhySection whyData={whyData} fadeIn={fadeIn} client={client} />
         </motion.section>
       )}
+
+      <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
+        <Regolamento />
+      </motion.div>
 
       <motion.div initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
         <ContactSection />
