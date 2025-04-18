@@ -2,6 +2,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { FaMobileAlt, FaLocationArrow, FaEnvelope } from "react-icons/fa";
 import styles from "../styles/ContactSection.module.scss";
+import styleButton from "../styles/Buttons.module.scss";
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -144,7 +145,7 @@ const ContactForm = () => {
                             ></textarea>
                         </div>
 
-                        <button type="submit" className={styles.submitButton} disabled={formStatus.isSubmitting}>
+                        <button type="submit" className={styleButton.submitButton} disabled={formStatus.isSubmitting}>
                             {formStatus.isSubmitting ? "Invio..." : "Invia"}
                         </button>
                     </form>

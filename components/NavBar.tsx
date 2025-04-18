@@ -5,6 +5,7 @@ import { GrFormClose } from "react-icons/gr";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.scss";
 import ChiamamiButton from "./ChiamamiButton";
+import PrenotaButton from "./PrenotaButton";
 
 export const Navbar: React.FC = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
@@ -28,6 +29,7 @@ export const Navbar: React.FC = () => {
                 <Link href="/menu"> Menu </Link>
                 <Link href="/gatti"> Gatti </Link>
                 <ChiamamiButton />
+                <PrenotaButton />
             </div>
 
             {!hamburgerClicked ? (
@@ -49,6 +51,7 @@ export const Navbar: React.FC = () => {
 
                 <div className={styles.menu_links_container} onClick={(e) => e.stopPropagation()}>
                     <ChiamamiButton />
+                    <PrenotaButton />
                     <Link href="/" onClick={() => setHamburgerClicked(false)}> Home </Link>
                     <Link href="/menu" onClick={() => setHamburgerClicked(false)}> Menu </Link>
                     <Link href="/gatti" onClick={() => setHamburgerClicked(false)}> Gatti </Link>

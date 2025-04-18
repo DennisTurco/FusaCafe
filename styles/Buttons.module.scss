@@ -1,5 +1,4 @@
 @use "resolution" as *;
-
 .button {
     padding: 10px 20px;
     font-size: 15px;
@@ -15,4 +14,20 @@
     &:hover {
         background-color: var(--chiamami-bg-hover);
     }
+}
+
+.submitButton {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary); /* Colore primario per il bottone */
+    color: var(--light);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submitButton:hover {
+    background-color: var(--accent); /* Colore accentato al passaggio del mouse */
 }
