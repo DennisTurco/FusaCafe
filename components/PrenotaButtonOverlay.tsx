@@ -6,26 +6,37 @@ export default function PrenotaButtonOverlay() {
   const [showBooking, setShowBooking] = useState(false);
   const [showLabel] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [isClient, setIsClient] = useState(false); // Stato per verificare se siamo lato client
 
   // Hook per rilevare la posizione dello scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollTop(window.scrollY); // Salva la posizione corrente dello scroll
-    };
+    // Verifica che il codice venga eseguito solo nel client (lato browser)
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+      setViewportHeight(window.innerHeight); // Imposta l'altezza iniziale della finestra
 
-    const handleResize = () => {
-      setViewportHeight(window.innerHeight); // Aggiorna l'altezza della finestra
-    };
+      const handleScroll = () => {
+        setScrollTop(window.scrollY); // Salva la posizione corrente dello scroll
+      };
 
-    window.addEventListener('scroll', handleScroll); // Aggiungi l'evento di scroll
-    window.addEventListener('resize', handleResize); // Aggiungi l'evento di resize per aggiornare l'altezza della finestra
+      const handleResize = () => {
+        setViewportHeight(window.innerHeight); // Aggiorna l'altezza della finestra
+      };
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll); // Pulisce l'evento al termine
-      window.removeEventListener('resize', handleResize); // Pulisce l'evento al termine
-    };
+      window.addEventListener('scroll', handleScroll); // Aggiungi l'evento di scroll
+      window.addEventListener('resize', handleResize); // Aggiungi l'evento di resize per aggiornare l'altezza della finestra
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll); // Pulisce l'evento al termine
+        window.removeEventListener('resize', handleResize); // Pulisce l'evento al termine
+      };
+    }
   }, []);
+
+  if (!isClient) {
+    return null; // Non renderizzare il componente lato server
+  }
 
   return (
     <>
