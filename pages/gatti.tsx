@@ -3,6 +3,7 @@ import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import Hero from "../components/Hero";
 import CatsSection from "../components/CatsSection";
+import PrenotaButtonOverlay from "../components/PrenotaButtonOverlay";
 import { motion } from "framer-motion";
 import { createClient } from "@sanity/client";
 
@@ -24,6 +25,8 @@ export default function Cats() {
 
             {/* Navbar */}
             <div><Navbar /></div>
+
+            <PrenotaButtonOverlay />
 
             {/* Hero Section */}
             <section><Hero imagePath={'/images/catsBanner.webp'} title={""} /></section>

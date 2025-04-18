@@ -3,6 +3,7 @@ import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import Hero from "../components/Hero";
 import MenuSection from "../components/MenuSection";
+import PrenotaButtonOverlay from "../components/PrenotaButtonOverlay";
 import { motion } from "framer-motion";
 
 const fadeIn = {
@@ -16,6 +17,8 @@ export default function Menu() {
           
             {/* Navbar */}
             <div><Navbar /></div>
+
+            <PrenotaButtonOverlay />
 
             {/* Hero Section */}
             <section><Hero imagePath={'/images/menuBanner.webp'} title={""} /></section>
