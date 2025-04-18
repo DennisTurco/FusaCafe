@@ -12,6 +12,7 @@ import Regolamento from "../components/Regolamento";
 import { createClient } from "@sanity/client";
 import { WhyData } from "../components/types";
 import ContactSection from "../components/ContactSection";
+import PrenotaButtonOverlay from "../components/PrenotaButtonOverlay";
 
 interface AboutRow {
   title: string;
@@ -68,6 +69,8 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
+
+      <PrenotaButtonOverlay />
 
       <motion.section initial="hidden" whileInView="visible" variants={fadeIn} viewport={{ once: true }}>
         <Hero />
