@@ -38,7 +38,7 @@ export const Footer = () => {
 
             <div className="flex items-center gap-3 mt-3">
                 <FaMobileAlt size={20} />
-                <p className="text-lg">+39 333 457 3213</p>
+                <p className="text-lg">+39 327 635 7910</p>
             </div>
 
             <div className="flex items-center gap-3 mt-3">

@@ -3,7 +3,7 @@ import { FaMobileAlt } from "react-icons/fa";
 import styles from "../styles/Buttons.module.scss";
 
 const ContattamiButton = () => {
-  const numeroTelefono = "+393334573213";
+  const numeroTelefono = "+393276357910";
 
   return (
     <a href={`tel:${numeroTelefono}`} className={styles.button}>

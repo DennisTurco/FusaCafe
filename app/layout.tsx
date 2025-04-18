@@ -49,7 +49,7 @@ interface RootLayoutProps {
 //       "postalCode": "43125",
 //       "addressCountry": "IT",
 //     },
-//     "telephone": "+39 333 457 3213",
+//     "telephone": "+39 327 635 7910",
 //     "sameAs": [
 //       "https://www.instagram.com/fusa_e_caffe/",
 //       "https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr",

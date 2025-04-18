@@ -14,7 +14,7 @@ export default function WhatsAppBooking({ onSuccess }: Props) {
   const [note, setNote] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const phone = '+393334573213';
+  const phone = '+393276357910';
 
   const formatDate = (date: string) => {
     const [year, month, day] = date.split('-');
