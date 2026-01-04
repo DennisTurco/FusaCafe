@@ -13,6 +13,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   * `npm install emailjs-com`
   * `npm i @vercel/speed-insights`
   * `npm install @supabase/supabase-js`
+  * `npm install react-hot-toast`
 
 * Before To run the project you have to create a `.env.local` file with these values:
 
@@ -71,7 +72,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     id uuid primary key default gen_random_uuid(),
     session_id uuid not null references table_sessions(id) on delete restrict,
     table_number int not null, -- is duplicated for the snapshot
-    customer_name text,
     status order_status default 'ricevuto',
     created_at timestamp with time zone default now()
   );
@@ -104,4 +104,5 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   create policy "Allow select for anon" on orders for select using (true);
   create policy "Allow select for anon" on order_items for select using (true);
   create policy "Allow select by token" on table_sessions for select using (true);
+  create policy "allow server write" on table_sessions for all using (true) with check (true);
   ```

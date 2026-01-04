@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Menu.module.scss";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -28,7 +29,6 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   const [loading, setLoading] = useState(true);
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
-
   const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
@@ -55,18 +55,20 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
-  // ✅ Funzione addToCart
+  // ✅ Funzione addToCart con toast
   function addToCart(item: MenuItem) {
     setCart((prev) => {
       const existing = prev.find((i) => i._key === item._key);
+      let newCart;
       if (existing) {
-        // aumenta quantità se già presente
-        return prev.map((i) =>
+        newCart = prev.map((i) =>
           i._key === item._key ? { ...i, quantity: i.quantity + 1 } : i
         );
       } else {
-        return [...prev, { ...item, quantity: 1 }];
+        newCart = [...prev, { ...item, quantity: 1 }];
       }
+      toast.success(`${item.name} aggiunto al carrello!`);
+      return newCart;
     });
   }
 
@@ -81,8 +83,32 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
     );
   }
 
+  async function sendOrder() {
+    const token = localStorage.getItem("table_token");
+    if (!token) {
+      toast.error("Sessione non valida");
+      return;
+    }
+
+    const res = await fetch("/api/send-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, items: cart }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      toast.success("Ordine inviato!");
+      setCart([]);
+    } else {
+      toast.error(data.error || "Errore invio ordine");
+    }
+  }
+
   return (
     <section className={styles.menuSection}>
+      <Toaster position="top-right" />
       <h2 className={styles.sectionTitle}>{menuName}</h2>
       <p className={styles.description}>{menuDescription}</p>
 
@@ -110,9 +136,9 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
                 {canOrder && (
                   <button
                     onClick={() => addToCart(item)}
-                    style={{ marginTop: "10px" }}
+                    className={styles.addToCartBtn}
                   >
-                    Aggiungi all’ordine
+                    🛒 Aggiungi all’ordine
                   </button>
                 )}
               </div>
@@ -121,24 +147,21 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
         )}
       </div>
 
-      {/* mini carrello visibile solo se ci sono elementi */}
+      {/* mini carrello */}
       {cart.length > 0 && (
-        <div style={{ marginTop: "30px", padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}>
+        <div className={styles.cartContainer}>
           <h3>Carrello</h3>
           {cart.map((i) => (
-            <div key={i._key} style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+            <div key={i._key} className={styles.cartItem}>
               <span>{i.name} x{i.quantity}</span>
-              <div>
+              <div className={styles.cartActions}>
                 <button onClick={() => updateQuantity(i._key, i.quantity - 1)}>-</button>
                 <button onClick={() => updateQuantity(i._key, i.quantity + 1)}>+</button>
                 <button onClick={() => removeFromCart(i._key)}>🗑️</button>
               </div>
             </div>
           ))}
-          <button
-            style={{ marginTop: "10px", padding: "8px 16px", backgroundColor: "var(--menu-card-title)", color: "#fff", border: "none", borderRadius: "6px" }}
-            onClick={() => alert("Qui chiamerai l'API per inviare l'ordine")}
-          >
+          <button className={styles.sendOrderBtn} onClick={sendOrder}>
             Invia Ordine
           </button>
         </div>
