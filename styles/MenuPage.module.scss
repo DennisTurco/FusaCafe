@@ -1,0 +1,43 @@
+@use "resolution" as *;
+
+.menuPage {
+  padding: 0;
+  margin: 0;
+}
+
+.orderButton {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: var(--menu-card-title);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.orderButton:hover {
+  filter: brightness(90%);
+}
+
+.cartContainer {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cartItem button {
+  margin-left: 5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  background: #fff;
+  cursor: pointer;
+}
