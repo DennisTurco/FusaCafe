@@ -23,7 +23,7 @@ export async function POST() {
     .delete()
     .lt('valid_to', validFrom.toISOString())
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('weekly_pins')
     .insert({
       pin,

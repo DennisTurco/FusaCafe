@@ -96,11 +96,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   alter table orders enable row level security;
   alter table order_items enable row level security;
 
-  create policy "Insert orders with valid token"
-  on orders for insert
-  with check (true);
-
-  create policy "Insert order items"
-  on order_items for insert
-  with check (true);
+  create policy "Insert orders with valid token" on orders for insert with check (true);
+  create policy "Insert order items" on order_items for insert with check (true);
+  create policy "Allow select for anon" on weekly_pins for select using (true);
+  create policy "Allow select for anon" on table_sessions for select using (true);
+  create policy "Allow insert for anon" on "public"."table_sessions" to public with check (true);
+  create policy "Allow select for anon" on orders for select using (true);
+  create policy "Allow select for anon" on order_items for select using (true);
+  create policy "Allow select by token" on table_sessions for select using (true);
   ```
