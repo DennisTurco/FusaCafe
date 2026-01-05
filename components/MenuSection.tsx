@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Menu.module.scss";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { Toaster, toast } from "react-hot-toast"; // ✅ import Toaster
+import { Toaster, toast } from "react-hot-toast";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa"
 
 const client = createClient({
@@ -39,7 +38,6 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     client
