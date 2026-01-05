@@ -1,11 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/lib/supabase";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") return res.status(405).json({ error: "Metodo non consentito" });
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Metodo non consentito" });
+  }
 
   try {
-    // Recupera gli ordini e i loro items
+    // Data di 24 ore fa
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayISO = yesterday.toISOString();
+
     const { data: orders, error } = await supabase
       .from("orders")
       .select(`
@@ -21,6 +30,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           quantity
         )
       `)
+      .or(
+        `status.not.in.(pronto,consegnato),created_at.gte.${yesterdayISO}`
+      )
       .order("created_at", { ascending: false });
 
     if (error) {

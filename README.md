@@ -23,6 +23,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     NEXT_PUBLIC_EMAILJS_SERVICE_ID=...
     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=...
     NEXT_PUBLIC_EMAILJS_USER_ID=...
+    NEXT_PUBLIC_SUPABASE_URL=...
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+    NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY=...
     ```
 
 * Run the development server:
@@ -41,7 +44,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     pin text not null,
     valid_from date not null,
     valid_to date not null,
-    created_at timestamp with time zone default now()
+    created_at timestamptz with time zone default now()
     );
   ```
 
@@ -53,8 +56,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     pin_id uuid references weekly_pins(id),
     table_number int not null,
     token uuid not null,
-    expires_at timestamp with time zone not null,
-    created_at timestamp with time zone default now()
+    expires_at timestamptz with time zone not null,
+    created_at timestamptz with time zone default now()
   );
   ```
 
@@ -73,7 +76,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     session_id uuid not null references table_sessions(id) on delete restrict,
     table_number int not null, -- is duplicated for the snapshot
     status order_status default 'ricevuto',
-    created_at timestamp with time zone default now()
+    created_at timestamptz with time zone default now()
   );
   ```
 
@@ -106,4 +109,55 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   create policy "Allow select by token" on table_sessions for select using (true);
   create policy "allow server write" on table_sessions for all using (true) with check (true);
   create policy "Allow update orders" on orders for update using (true) with check (true);
+  ```
+
+* Functions
+
+  ```sql
+  create or replace function heartbeat()
+  returns void
+  language sql
+  as $$
+    select 1;
+  $$;
+
+  create or replace function cleanup_old_data()
+  returns void
+  language plpgsql
+  as $$
+  begin
+    delete from order_items
+    where order_id in (
+      select id
+      from orders
+      where created_at < now() - interval '1 month'
+    );
+
+    delete from orders
+    where created_at < now() - interval '1 month';
+
+    delete from table_sessions
+    where created_at < now() - interval '1 month';
+
+    delete from weekly_pins
+    where created_at < now() - interval '1 month';
+  end;
+  $$;
+
+
+  create or replace function check_valid_session(p_token uuid)
+  returns table (
+    id uuid,
+    table_number int,
+    expires_at timestamptz
+  )
+  language sql
+  as $$
+    select id, table_number, expires_at
+    from table_sessions
+    where token = p_token
+      and expires_at > now()
+    limit 1;
+  $$;
+  revoke all on function check_valid_session from public;
   ```
