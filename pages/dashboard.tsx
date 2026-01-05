@@ -1,4 +1,7 @@
 import "/styles/global.scss"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabase";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { DashboardSection } from "../components/DashboardSection";
@@ -10,6 +13,28 @@ const fadeIn = {
 };
 
 export default function Dashboard() {
+
+  const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data } = await supabase.auth.getSession();
+
+      if (!data.session) {
+        router.replace("/login");
+      } else {
+        setCheckingAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  if (checkingAuth) {
+    return <div style={{ padding: 40 }}>Verifica autenticazione...</div>;
+  }
+
     return (
         <div className="">
 
