@@ -74,8 +74,8 @@ export const DashboardSection: React.FC = () => {
   return (
     <div className={styles.dashboard}>
       <Toaster position="top-right" />
-      <audio ref={audioRef} src="/sounds/notification.mp3" preload="auto" />
-      <h1>Dashboard Ordini</h1>
+      <audio ref={audioRef} src="/sounds/notification.wav" preload="auto" />
+      <h1> - </h1>
 
       {orders.length === 0 ? (
         <div className={styles.noOrders}>Nessun ordine presente</div>
