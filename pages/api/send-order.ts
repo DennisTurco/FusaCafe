@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -25,7 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("TOKEN RICEVUTO:", token)
     console.log("NOW:", now)
 
-    // 1️⃣ Verifica sessione
     const { data: session, error: sessionError } = await supabase
       .from("table_sessions")
       .select("*")
@@ -37,7 +35,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: "Sessione non valida o scaduta" })
     }
 
-    // 2️⃣ Crea ordine
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({
@@ -53,8 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: "Errore creazione ordine" })
     }
 
-    // 3️⃣ Inserisci righe ordine
-    const orderItems = items.map((item: any) => ({
+    const orderItems = items.map((item) => ({
       order_id: order.id,
       sanity_item_id: item._key,
       name: item.name,

@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const today = new Date().toISOString().split("T")[0]
 
-    // 1️⃣ Verifica PIN valido
+    // Verifica PIN valido
     const { data: weeklyPin } = await supabase
       .from("weekly_pins")
       .select("*")
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: "PIN non valido o scaduto" })
     }
 
-    // 2️⃣ Cerca sessione ESISTENTE per tavolo (indipendente dal PIN)
+    // Cerca sessione ESISTENTE per tavolo (indipendente dal PIN)
     const { data: existingSession } = await supabase
       .from("table_sessions")
       .select("*")
@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const token = uuidv4()
     const expiresAt = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()
 
-    // 3️⃣ Se NON esiste → crea
+    // Se NON esiste → crea
     if (!existingSession) {
       const { data: newSession, error } = await supabase
         .from("table_sessions")
@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ token: newSession.token })
     }
 
-    // 4️⃣ Se ESISTE → aggiorna SEMPRE
+    // Se ESISTE → aggiorna SEMPRE
     const { error: updateError } = await supabase
       .from("table_sessions")
       .update({
