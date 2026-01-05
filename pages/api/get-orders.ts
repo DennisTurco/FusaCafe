@@ -1,0 +1,36 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+import { supabase } from "@/lib/supabase";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "GET") return res.status(405).json({ error: "Metodo non consentito" });
+
+  try {
+    // Recupera gli ordini e i loro items
+    const { data: orders, error } = await supabase
+      .from("orders")
+      .select(`
+        id,
+        table_number,
+        status,
+        created_at,
+        order_items (
+          id,
+          sanity_item_id,
+          name,
+          price,
+          quantity
+        )
+      `)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Errore get-orders:", error);
+      return res.status(500).json({ error: "Errore recupero ordini" });
+    }
+
+    return res.status(200).json(orders);
+  } catch (err) {
+    console.error("Errore server:", err);
+    return res.status(500).json({ error: "Errore server" });
+  }
+}

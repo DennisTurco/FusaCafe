@@ -1,0 +1,117 @@
+.dashboard {
+  padding: var(--page-margin);
+  font-family: "Poppins", sans-serif;
+  background: var(--background);
+  min-height: 100vh;
+
+  h1 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 40px;
+    font-size: var(--xl-header-fs);
+    font-weight: 900;
+  }
+}
+
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.orderCard {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: var(--md-body-fs);
+    color: var(--light);
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: var(--primary);
+  }
+
+  .statusBadge {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--light);
+  }
+
+  .status-ricevuto { background: #facc15; color: #111; }        // giallo
+  .status-in_preparazione { background: #f97316; }               // arancio
+  .status-pronto { background: #16a34a; }                        // verde
+  .status-consegnato { background: #3b82f6; }                    // blu
+
+  .orderItems {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 0;
+
+    .itemRow {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--accent);
+
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  .orderFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+
+    span {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    select {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: var(--light);
+      color: var(--foreground);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.2s ease;
+
+      &:hover {
+        background: var(--accent);
+        color: var(--light);
+      }
+    }
+  }
+}
+
+.noOrders {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 1.2rem;
+  color: var(--primary);
+}

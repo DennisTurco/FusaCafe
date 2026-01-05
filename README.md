@@ -105,4 +105,5 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   create policy "Allow select for anon" on order_items for select using (true);
   create policy "Allow select by token" on table_sessions for select using (true);
   create policy "allow server write" on table_sessions for all using (true) with check (true);
+  create policy "Allow update orders" on orders for update using (true) with check (true);
   ```

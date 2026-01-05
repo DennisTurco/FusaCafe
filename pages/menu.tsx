@@ -65,12 +65,14 @@ export default function Menu() {
       </section>
 
       <div style={{ textAlign: "center", margin: "30px 0" }}>
-        <button
-          onClick={handleOrderClick}
-          className={styles.orderButton}
-        >
-          {canOrder ? "Inizia Ordine" : "Ordina al Tavolo"}
-        </button>
+        {!canOrder && (
+          <button
+            onClick={handleOrderClick}
+            className={styles.orderButton}
+          >
+            Ordina al Tavolo
+          </button>
+        )}
       </div>
 
       <motion.div initial="hidden" whileInView="visible">

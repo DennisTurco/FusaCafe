@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Menu.module.scss";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast"; // ✅ import Toaster
+import { FaPlus, FaMinus, FaTrash } from "react-icons/fa"
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -12,12 +13,19 @@ const client = createClient({
   useCdn: true,
 });
 
+// Tipi
 interface MenuItem {
   _key: string;
   name: string;
   description: string;
   price: string;
   image?: { asset: { url: string } } | null;
+}
+
+interface MenuData {
+  name: string;
+  description: string;
+  data: MenuItem[];
 }
 
 interface CartItem extends MenuItem {
@@ -44,7 +52,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
           image{asset->{url}}
         }
       }[0]`)
-      .then((menuData: any) => {
+      .then((menuData: MenuData) => {
         setMenuName(menuData?.name || "Menu Non Disponibile");
         setMenuDescription(menuData?.description || "Descrizione non disponibile");
         setMenuItems(menuData?.data || []);
@@ -55,60 +63,81 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
-  // ✅ Funzione addToCart con toast
+  // ✅ Funzione addToCart con toast singolo
   function addToCart(item: MenuItem) {
-    setCart((prev) => {
-      const existing = prev.find((i) => i._key === item._key);
-      let newCart;
-      if (existing) {
-        newCart = prev.map((i) =>
-          i._key === item._key ? { ...i, quantity: i.quantity + 1 } : i
-        );
-      } else {
-        newCart = [...prev, { ...item, quantity: 1 }];
-      }
-      toast.success(`${item.name} aggiunto al carrello!`);
+    setCart(prev => {
+      const existing = prev.find(i => i._key === item._key);
+      const newCart = existing
+        ? prev.map(i => i._key === item._key ? { ...i, quantity: i.quantity + 1 } : i)
+        : [...prev, { ...item, quantity: 1 }];
+
+      // ✅ Mostra un solo toast e chiude eventuali precedenti
+      toast.dismiss();
+      toast.success(`${item.name} aggiunto al carrello!`, {
+        duration: 1500,
+        position: "bottom-right",
+        style: {
+          background: "#4CAF50",
+          color: "#fff",
+          borderRadius: "8px",
+          padding: "12px 18px",
+          fontWeight: "500"
+        }
+      });
+
       return newCart;
     });
   }
 
   function removeFromCart(itemKey: string) {
-    setCart((prev) => prev.filter((i) => i._key !== itemKey));
+    setCart(prev => prev.filter(i => i._key !== itemKey));
   }
 
   function updateQuantity(itemKey: string, qty: number) {
     if (qty <= 0) return removeFromCart(itemKey);
-    setCart((prev) =>
-      prev.map((i) => (i._key === itemKey ? { ...i, quantity: qty } : i))
-    );
+    setCart(prev => prev.map(i => i._key === itemKey ? { ...i, quantity: qty } : i));
   }
 
   async function sendOrder() {
     const token = localStorage.getItem("table_token");
     if (!token) {
-      toast.error("Sessione non valida");
+      toast.error("Sessione non valida", { position: "bottom-right" });
       return;
     }
+
+    const itemsForOrder = cart.map(item => ({
+      _key: item._key,
+      name: item.name,
+      quantity: item.quantity,
+      price: parseFloat(item.price.replace(",", "."))
+    }));
 
     const res = await fetch("/api/send-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, items: cart }),
+      body: JSON.stringify({ token, items: itemsForOrder }),
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      toast.success("Ordine inviato!");
+      toast.success("Ordine inviato!", { position: "bottom-right" });
       setCart([]);
     } else {
-      toast.error(data.error || "Errore invio ordine");
+      toast.error(data.error || "Errore invio ordine", { position: "bottom-right" });
     }
   }
 
+  // Totale carrello
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + parseFloat(item.price.replace(",", ".")) * item.quantity,
+    0
+  );
+
   return (
     <section className={styles.menuSection}>
-      <Toaster position="top-right" />
+      <Toaster />
+
       <h2 className={styles.sectionTitle}>{menuName}</h2>
       <p className={styles.description}>{menuDescription}</p>
 
@@ -116,16 +145,10 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
         {menuItems.length === 0 ? (
           <p className={styles.noMenu}>Menu non disponibile</p>
         ) : (
-          menuItems.map((item) => (
+          menuItems.map(item => (
             <div key={item._key} className={styles.menuItem}>
               {item.image?.asset?.url ? (
-                <Image
-                  src={item.image.asset.url}
-                  alt={item.name}
-                  width={120}
-                  height={120}
-                  className={styles.image}
-                />
+                <Image src={item.image.asset.url} alt={item.name} width={120} height={120} className={styles.image} />
               ) : (
                 <div className={styles.imagePlaceholder}></div>
               )}
@@ -134,11 +157,8 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
                 <p className={styles.description}>{item.description}</p>
                 <p className={styles.price}>€ {item.price}</p>
                 {canOrder && (
-                  <button
-                    onClick={() => addToCart(item)}
-                    className={styles.addToCartBtn}
-                  >
-                    🛒 Aggiungi all’ordine
+                  <button className={styles.addToCartBtn} onClick={() => addToCart(item)}>
+                    Aggiungi all’ordine
                   </button>
                 )}
               </div>
@@ -147,20 +167,30 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
         )}
       </div>
 
-      {/* mini carrello */}
+      {/* Mini carrello */}
       {cart.length > 0 && (
         <div className={styles.cartContainer}>
-          <h3>Carrello</h3>
-          {cart.map((i) => (
+          <h3 className={styles.cartTitle}>Carrello</h3>
+
+          {cart.map(i => (
             <div key={i._key} className={styles.cartItem}>
-              <span>{i.name} x{i.quantity}</span>
+              <div className={styles.itemInfo}>
+                <span className={styles.itemName}>{i.name} x{i.quantity}</span>
+                <span className={styles.itemPrice}>€ {(parseFloat(i.price.replace(",", ".")) * i.quantity).toFixed(2)}</span>
+              </div>
               <div className={styles.cartActions}>
-                <button onClick={() => updateQuantity(i._key, i.quantity - 1)}>-</button>
-                <button onClick={() => updateQuantity(i._key, i.quantity + 1)}>+</button>
-                <button onClick={() => removeFromCart(i._key)}>🗑️</button>
+                <button onClick={() => updateQuantity(i._key, i.quantity - 1)} className={styles.cartBtn}><FaMinus /></button>
+                <button onClick={() => updateQuantity(i._key, i.quantity + 1)} className={styles.cartBtn}><FaPlus /></button>
+                <button onClick={() => removeFromCart(i._key)} className={styles.cartBtn}><FaTrash /></button>
               </div>
             </div>
           ))}
+
+          <div className={styles.cartTotal}>
+            <span>Totale:</span>
+            <strong>€ {cartTotal.toFixed(2)}</strong>
+          </div>
+
           <button className={styles.sendOrderBtn} onClick={sendOrder}>
             Invia Ordine
           </button>
