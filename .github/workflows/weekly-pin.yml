@@ -2,7 +2,8 @@ name: Generate Weekly PIN
 
 on:
   schedule:
-    - cron: "0 6 * * 1"
+    # - cron: "0 6 * * 1"
+    - cron: "0 0 * * *" # only for test
   workflow_dispatch:
 
 jobs:

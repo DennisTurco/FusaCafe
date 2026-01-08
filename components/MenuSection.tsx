@@ -1,10 +1,9 @@
-"use client";
 import { useEffect, useState } from "react";
 import styles from "../styles/Menu.module.scss";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
 import { Toaster, toast } from "react-hot-toast";
-import { FaPlus, FaMinus, FaTrash } from "react-icons/fa"
+import { FaPlus, FaMinus, FaTrash, FaShoppingCart, FaTimes } from "react-icons/fa";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -38,6 +37,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   const [menuName, setMenuName] = useState("");
   const [menuDescription, setMenuDescription] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false); // nuovo stato
 
   useEffect(() => {
     client
@@ -63,6 +63,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
+  // Carrello
   function addToCart(item: MenuItem) {
     setCart(prev => {
       const existing = prev.find(i => i._key === item._key);
@@ -73,14 +74,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
       toast.dismiss();
       toast.success(`${item.name} aggiunto al carrello!`, {
         duration: 1500,
-        position: "bottom-right",
-        style: {
-          background: "#4CAF50",
-          color: "#fff",
-          borderRadius: "8px",
-          padding: "12px 18px",
-          fontWeight: "500"
-        }
+        style: { background: "#4CAF50", color: "#fff", borderRadius: "8px", padding: "12px 18px", fontWeight: "500" }
       });
 
       return newCart;
@@ -99,7 +93,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   async function sendOrder() {
     const token = localStorage.getItem("table_token");
     if (!token) {
-      toast.error("Sessione non valida", { position: "bottom-right" });
+      toast.error("Sessione non valida");
       return;
     }
 
@@ -119,18 +113,15 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
     const data = await res.json();
 
     if (res.ok) {
-      toast.success("Ordine inviato!", { position: "bottom-right" });
+      toast.success("Ordine inviato!");
       setCart([]);
+      setIsCartOpen(false);
     } else {
-      toast.error(data.error || "Errore invio ordine", { position: "bottom-right" });
+      toast.error(data.error || "Errore invio ordine");
     }
   }
 
-  // Totale carrello
-  const cartTotal = cart.reduce(
-    (sum, item) => sum + parseFloat(item.price.replace(",", ".")) * item.quantity,
-    0
-  );
+  const cartTotal = cart.reduce((sum, item) => sum + parseFloat(item.price.replace(",", ".")) * item.quantity, 0);
 
   return (
     <section className={styles.menuSection}>
@@ -155,9 +146,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
                 <p className={styles.description}>{item.description}</p>
                 <p className={styles.price}>€ {item.price}</p>
                 {canOrder && (
-                  <button className={styles.addToCartBtn} onClick={() => addToCart(item)}>
-                    Aggiungi all’ordine
-                  </button>
+                  <button className={styles.addToCartBtn} onClick={() => addToCart(item)}>Aggiungi all’ordine</button>
                 )}
               </div>
             </div>
@@ -165,11 +154,26 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
         )}
       </div>
 
-      {/* Mini carrello */}
-      {cart.length > 0 && (
-        <div className={styles.cartContainer}>
-          <h3 className={styles.cartTitle}>Carrello</h3>
+      {/* Icona carrello flottante */}
+      {canOrder && (
+        <div
+          className={styles.cartIconWrapper}
+          onClick={() => cart.length > 0 && setIsCartOpen(!isCartOpen)} // solo se ci sono elementi
+          style={{ cursor: cart.length > 0 ? 'pointer' : 'not-allowed', opacity: cart.length > 0 ? 1 : 0.5 }}
+        >
+          <FaShoppingCart className={styles.cartIcon} />
+          {cart.length > 0 && <span className={styles.cartBadge}>{cart.length}</span>}
+        </div>
+      )}
 
+
+      {/* Popup carrello */}
+      {isCartOpen && (
+        <div className={styles.cartPopup}>
+          <div className={styles.cartPopupHeader}>
+            <h3>Carrello</h3>
+            <FaTimes className={styles.closeCart} onClick={() => setIsCartOpen(false)} />
+          </div>
           {cart.map(i => (
             <div key={i._key} className={styles.cartItem}>
               <div className={styles.itemInfo}>
@@ -183,15 +187,11 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
               </div>
             </div>
           ))}
-
           <div className={styles.cartTotal}>
             <span>Totale:</span>
             <strong>€ {cartTotal.toFixed(2)}</strong>
           </div>
-
-          <button className={styles.sendOrderBtn} onClick={sendOrder}>
-            Invia Ordine
-          </button>
+          <button className={styles.sendOrderBtn} onClick={sendOrder}>Invia Ordine</button>
         </div>
       )}
     </section>

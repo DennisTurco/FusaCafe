@@ -20,12 +20,6 @@ export default async function handler(
     const validTo = new Date()
     validTo.setDate(validFrom.getDate() + 7)
 
-    // opzionale: pulizia pin scaduti
-    await supabaseServer
-      .from("weekly_pins")
-      .delete()
-      .lt("valid_to", validFrom.toISOString())
-
     const { error } = await supabaseServer
       .from("weekly_pins")
       .insert({

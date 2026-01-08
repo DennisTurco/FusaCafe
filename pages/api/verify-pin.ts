@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Se ESISTE → aggiorna SEMPRE
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseServer
       .from("table_sessions")
       .update({
         pin_id: weeklyPin.id,
