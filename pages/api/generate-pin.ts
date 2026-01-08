@@ -21,7 +21,7 @@ export default async function handler(
     validTo.setDate(validFrom.getDate() + 7)
 
     const { error } = await supabaseServer
-      .from("weekly_pins")
+      .from("pins")
       .insert({
         pin,
         valid_from: validFrom.toISOString(),

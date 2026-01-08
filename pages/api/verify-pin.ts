@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Verifica PIN valido
     const { data: weeklyPin } = await supabaseClient
-      .from("weekly_pins")
+      .from("pins")
       .select("*")
       .eq("pin", String(pin))
       .lte("valid_from", today)

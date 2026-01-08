@@ -21,7 +21,7 @@ function generatePin() {
   validTo.setDate(today.getDate() + 7);
   const validToISO = validTo.toISOString().split("T")[0];
 
-  const { error } = await supabase.from("weekly_pins").insert({
+  const { error } = await supabase.from("pins").insert({
     pin,
     valid_from: validFrom,
     valid_to: validToISO,

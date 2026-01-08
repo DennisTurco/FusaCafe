@@ -36,10 +36,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Supabase tables structure
 
-* weekly_pins table
+* pins table
 
   ```sql
-  create table weekly_pins (
+  create table pins (
     id uuid primary key default gen_random_uuid(),
     pin text not null,
     valid_from date not null,
@@ -53,7 +53,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   ```sql
   create table table_sessions (
     id uuid primary key default gen_random_uuid(),
-    pin_id uuid references weekly_pins(id),
+    pin_id uuid references pins(id),
     table_number int not null,
     token uuid not null,
     expires_at timestamptz with time zone not null,
@@ -101,7 +101,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
   create policy "Insert orders with valid token" on orders for insert with check (true);
   create policy "Insert order items" on order_items for insert with check (true);
-  create policy "Allow select for anon" on weekly_pins for select using (true);
+  create policy "Allow select for anon" on pins for select using (true);
   create policy "Allow select for anon" on table_sessions for select using (true);
   create policy "Allow insert for anon" on "public"."table_sessions" to public with check (true);
   create policy "Allow select for anon" on orders for select using (true);
@@ -139,7 +139,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     delete from table_sessions
     where created_at < now() - interval '1 month';
 
-    delete from weekly_pins
+    delete from pins
     where created_at < now() - interval '1 month';
   end;
   $$;
@@ -179,7 +179,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
       p.valid_from,
       p.valid_to,
       p.created_at
-    from weekly_pins p
+    from pins p
     where
       now() between valid_from and valid_to
     order by p.created_at desc
