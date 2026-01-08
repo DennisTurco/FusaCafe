@@ -25,6 +25,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     NEXT_PUBLIC_EMAILJS_USER_ID=...
     NEXT_PUBLIC_SUPABASE_URL=...
     NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+    SUPABASE_SERVICE_ROLE_KEY=...
     ```
 
 * Run the development server:
@@ -159,4 +160,30 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     limit 1;
   $$;
   revoke all on function check_valid_session from public;
+
+
+  create or replace function get_new_active_pin()
+  returns table (
+    id text,
+    pin text,
+    valid_from timestamptz,
+    valid_to timestamptz,
+    created_at timestamptz
+  )
+  language sql
+  security definer
+  as $$
+    select
+      p.id,
+      p.pin,
+      p.valid_from,
+      p.valid_to,
+      p.created_at
+    from weekly_pins p
+    where
+      now() between valid_from and valid_to
+    order by p.created_at desc
+    limit 1;
+  $$;
+  grant execute on function get_new_active_pin() to anon, authenticated;
   ```

@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { supabase } from "@/lib/supabase"
+import { supabaseServer } from "@/lib/supabaseServer"
+import { supabaseClient } from "@/lib/supabaseClient"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -15,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const now = new Date().toISOString()
 
-    const { data: all } = await supabase
+    const { data: all } = await supabaseServer
     .from("table_sessions")
     .select("*")
 
@@ -24,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log("TOKEN RICEVUTO:", token)
     console.log("NOW:", now)
 
-    const { data: session, error: sessionError } = await supabase
+    const { data: session, error: sessionError } = await supabaseClient
       .from("table_sessions")
       .select("*")
       .eq("token", token)
@@ -35,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: "Sessione non valida o scaduta" })
     }
 
-    const { data: order, error: orderError } = await supabase
+    const { data: order, error: orderError } = await supabaseServer
       .from("orders")
       .insert({
         table_number: session.table_number,
@@ -58,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       quantity: item.quantity
     }))
 
-    const { error: itemsError } = await supabase
+    const { error: itemsError } = await supabaseServer
       .from("order_items")
       .insert(orderItems)
 

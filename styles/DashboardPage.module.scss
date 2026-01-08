@@ -1,5 +1,6 @@
 .dashboard {
   padding: var(--page-margin);
+  padding-top: 100px; // altezza della navbar + un po’ di margine
   font-family: "Poppins", sans-serif;
   background: var(--background);
   min-height: 100vh;
@@ -114,4 +115,46 @@
   padding: 60px 0;
   font-size: 1.2rem;
   color: var(--primary);
+}
+
+
+.pinBanner {
+  position: sticky;
+  top: 64px; // altezza navbar
+  z-index: 10;
+
+  background: #111;
+  border-bottom: 2px solid #00ff88;
+  padding: 12px 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pinValue {
+  font-size: 1.2rem;
+  color: #00ff88;
+}
+
+.pinDates {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+
+.noPin {
+  justify-content: space-between;
+  background: #220000;
+  border-bottom: 2px solid #ff5555;
+}
+
+.regenerateBtn {
+  background: #ff5555;
+  border: none;
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
 }

@@ -20,11 +20,44 @@ interface Order {
   order_items: OrderItem[];
 }
 
+interface Pin {
+  id: string;
+  pin: string;
+  valid_from: string;
+  valid_to: string;
+  created_at: string;
+}
+
 export const DashboardSection: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [activePin, setActivePin] = useState<Pin | null>(null);
   const [loading, setLoading] = useState(true);
   const prevOrdersRef = useRef<Order[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const fetchPin = async () => {
+    try {
+      const res = await fetch("/api/get-pin");
+      if (!res.ok) throw new Error("Fetch pin errror");
+
+      const data = await res.json();
+
+      if (data.valid) {
+        setActivePin({
+          id: "active",
+          pin: data.pin,
+          valid_from: data.valid_from,
+          valid_to: data.valid_to,
+          created_at: "",
+        });
+      } else {
+        setActivePin(null);
+      }
+
+    } catch (err) {
+      console.error("get-pin error:", err);
+    }
+  };
 
   const fetchOrders = async () => {
     try {
@@ -47,10 +80,31 @@ export const DashboardSection: React.FC = () => {
     }
   };
 
+  const generatePin = async () => {
+    try {
+      const res = await fetch("/api/generate-pin", {
+        method: "POST",
+      });
+
+      if (!res.ok) throw new Error("PIN generation error");
+
+      toast.success("Nuovo PIN generato");
+      fetchPin();
+    } catch (err) {
+      console.error(err);
+      toast.error("Errore rigenerazione PIN");
+    }
+  };
+
   useEffect(() => {
     fetchOrders();
-    const interval = setInterval(fetchOrders, 30000); // refresh ogni 30s
-    return () => clearInterval(interval);
+    fetchPin();
+    const ordersInterval = setInterval(fetchOrders, 30000); // refresh ogni 30s
+    const pinInterval = setInterval(fetchPin, 60 * 60 * 1000); // ogni 1 ora
+    return () => {
+      clearInterval(ordersInterval);
+      clearInterval(pinInterval);
+    };
   }, []);
 
   const updateStatus = async (orderId: string, status: OrderStatus) => {
@@ -75,7 +129,28 @@ export const DashboardSection: React.FC = () => {
     <div className={styles.dashboard}>
       <Toaster position="top-right" />
       <audio ref={audioRef} src="/sounds/notification.wav" preload="auto" />
-      <h1> - </h1>
+      <h1></h1>
+
+      {activePin ? (
+        <div className={styles.pinBanner}>
+          <div className={styles.pinValue}>
+            PIN ATTIVO: <strong>{activePin.pin}</strong>
+          </div>
+          <div className={styles.pinDates}>
+            Valido da{" "}
+            {new Date(activePin.valid_from).toLocaleString()}{" "}
+            a{" "}
+            {new Date(activePin.valid_to).toLocaleString()}
+          </div>
+        </div>
+      ) : (
+        <div className={`${styles.pinBanner} ${styles.noPin}`}>
+          <span>Nessun PIN attivo</span>
+          <button onClick={generatePin} className={styles.regenerateBtn}>
+            Rigenera PIN
+          </button>
+        </div>
+      )}
 
       {orders.length === 0 ? (
         <div className={styles.noOrders}>Nessun ordine presente</div>

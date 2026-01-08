@@ -1,7 +1,7 @@
 import "/styles/global.scss"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { supabase } from "@/lib/supabase";
+import { supabaseClient } from "@/lib/supabaseClient";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 import { DashboardSection } from "../components/DashboardSection";
@@ -19,7 +19,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data } = await supabase.auth.getSession();
+      const { data } = await supabaseClient.auth.getSession();
 
       if (!data.session) {
         router.replace("/login");

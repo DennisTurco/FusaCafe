@@ -63,7 +63,6 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
-  // ✅ Funzione addToCart con toast singolo
   function addToCart(item: MenuItem) {
     setCart(prev => {
       const existing = prev.find(i => i._key === item._key);
@@ -71,7 +70,6 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
         ? prev.map(i => i._key === item._key ? { ...i, quantity: i.quantity + 1 } : i)
         : [...prev, { ...item, quantity: 1 }];
 
-      // ✅ Mostra un solo toast e chiude eventuali precedenti
       toast.dismiss();
       toast.success(`${item.name} aggiunto al carrello!`, {
         duration: 1500,

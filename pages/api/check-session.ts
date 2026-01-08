@@ -1,23 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { supabase } from "@/lib/supabase"
+import { supabaseClient } from "@/lib/supabaseClient"
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Metodo non consentito" })
+    return res.status(405).json({ error: "Method not allowed" })
   }
 
   const { token } = req.body
 
   if (!token) {
-    return res.status(400).json({ valid: false, error: "Token mancante" })
+    return res.status(400).json({ valid: false, error: "Missing token" })
   }
 
   try {
-
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .rpc("check_valid_session", { p_token: token });
 
     if (error) {
@@ -41,7 +37,7 @@ export default async function handler(
     });
 
   } catch (err) {
-    console.error("Errore server check-session:", err)
+    console.error("Check-session server error:", err)
     return res.status(500).json({ valid: false })
   }
 }

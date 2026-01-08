@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { supabase } from "@/lib/supabase"
+import { supabaseClient } from "@/lib/supabaseClient"
+import { supabaseServer } from "@/lib/supabaseServer"
 import { v4 as uuidv4 } from "uuid"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -16,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const today = new Date().toISOString().split("T")[0]
 
     // Verifica PIN valido
-    const { data: weeklyPin } = await supabase
+    const { data: weeklyPin } = await supabaseClient
       .from("weekly_pins")
       .select("*")
       .eq("pin", String(pin))
@@ -29,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Cerca sessione ESISTENTE per tavolo (indipendente dal PIN)
-    const { data: existingSession } = await supabase
+    const { data: existingSession } = await supabaseClient
       .from("table_sessions")
       .select("*")
       .eq("table_number", tableNumber)
@@ -40,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Se NON esiste → crea
     if (!existingSession) {
-      const { data: newSession, error } = await supabase
+      const { data: newSession, error } = await supabaseServer
         .from("table_sessions")
         .insert({
           table_number: tableNumber,
