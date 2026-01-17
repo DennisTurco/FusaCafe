@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "/styles/DashboardPage.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
-type OrderStatus = "ricevuto" | "in_preparazione" | "pronto" | "consegnato";
+type OrderStatus = "ricevuto" | "consegnato" | "rifiutato";
 
 interface OrderItem {
   id: string;
@@ -199,9 +199,8 @@ export const DashboardSection: React.FC = () => {
                     }
                   >
                     <option value="ricevuto">Ricevuto</option>
-                    <option value="in_preparazione">In Preparazione</option>
-                    <option value="pronto">Pronto</option>
                     <option value="consegnato">Consegnato</option>
+                    <option value="rifiutato">Rifiutato</option>
                   </select>
                 </div>
               </div>

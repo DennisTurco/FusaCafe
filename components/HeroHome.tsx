@@ -14,8 +14,8 @@ export const HeroSection = () => {
             src="/gifs/gattoCaffe.gif"
             alt="Gatto che beve caffè"
             className={styles.gifImage}
-            width={400} 
-            height={400} 
+            width={400}
+            height={400}
             loading="lazy"
           />
         </div>
@@ -23,7 +23,7 @@ export const HeroSection = () => {
         {/* Testo centrato */}
         <div className={styles.textContainer}>
           <h1 className={styles.title}>Fusa & Caffè</h1>
-          <div className={styles.phoneContainer}>            
+          <div className={styles.phoneContainer}>
           </div>
           <p className={styles.description}>
             Un angolo accogliente dove gustare un buon caffè e rilassarti in compagnia dei nostri gatti.

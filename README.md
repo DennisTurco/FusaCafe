@@ -66,9 +66,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   ```sql
   create type order_status as enum (
     'ricevuto',
-    'in_preparazione',
-    'pronto',
-    'consegnato'
+    'consegnato',
+    'rifiutato'
   );
 
   create table orders (

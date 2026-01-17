@@ -32,11 +32,11 @@ const ContactForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
         const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
         const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
-    
+
         // Verifica che le variabili non siano undefined
         if (!serviceId || !templateId || !userId) {
             console.error("Missing required EmailJS environment variables.");
@@ -47,10 +47,10 @@ const ContactForm = () => {
             });
             return;
         }
-    
+
         // Castiamo e.target come HTMLFormElement
         const form = e.target as HTMLFormElement;
-    
+
         try {
             const result = await emailjs.sendForm(
                 serviceId,  // Service ID
@@ -58,14 +58,14 @@ const ContactForm = () => {
                 form,       // Passiamo la form castata correttamente
                 userId      // User ID
             );
-        
+
             if (result.status === 200) {
                 setFormStatus({
                     success: true,
                     errorMessage: null,
                     isSubmitting: false,
                 });
-        
+
                 // Reset del modulo dopo l'invio
                 setFormData({
                     name: "",

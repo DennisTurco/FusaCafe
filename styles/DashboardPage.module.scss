@@ -55,10 +55,9 @@
     color: var(--light);
   }
 
-  .status-ricevuto { background: #facc15; color: #111; }        // giallo
-  .status-in_preparazione { background: #f97316; }               // arancio
-  .status-pronto { background: #16a34a; }                        // verde
-  .status-consegnato { background: #3b82f6; }                    // blu
+  .status-ricevuto { background: #facc15; color: #111; }
+  .status-consegnato { background: #16a34a; }
+  .status-rifiutato { background: #ff0000; }
 
   .orderItems {
     display: flex;

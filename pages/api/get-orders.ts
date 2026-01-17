@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         )
       `)
       .or(
-        `status.not.in.(pronto,consegnato),created_at.gte.${yesterdayISO}`
+        `status.not.in.(rifiutato,consegnato),created_at.gte.${yesterdayISO}`
       )
       .order("created_at", { ascending: false });
 

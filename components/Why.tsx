@@ -8,13 +8,13 @@ import { WhyData } from "../components/types";
 interface WhyCardProps {
   title: string;
   image?: {
-    asset?: { 
+    asset?: {
       _ref?: string;
       url?: string;
     };
   };
   description: string;
-  altText?: string; 
+  altText?: string;
   client: SanityClient;
 }
 
@@ -27,7 +27,7 @@ const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, c
       return imageUrl;
     }
     console.log("No URL or _ref found in the asset");
-    return "";  
+    return "";
   };
 
   const imageUrl = image ? urlFor(image) : "";

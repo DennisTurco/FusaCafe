@@ -9,14 +9,14 @@ import Image from "next/image";
 export const Footer = () => {
     return (
         <footer className={styles.footer}>
-            <Link href="/" className="flex flex-col items-center"> 
+            <Link href="/" className="flex flex-col items-center">
                 Fusa & Caffè
-                <Image 
-                    src="/images/logo.webp" 
-                    alt="logo" 
-                    width={80} 
+                <Image
+                    src="/images/logo.webp"
+                    alt="logo"
+                    width={80}
                     height={80}
-                    className="max-w-[80px] mb-4" 
+                    className="max-w-[80px] mb-4"
                     loading="lazy"
                 />
             </Link>
