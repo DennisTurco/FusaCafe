@@ -31,6 +31,30 @@
   position: relative;
 }
 
+.menuItem.soldOut {
+  opacity: 0.55;
+}
+
+.soldOutBanner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4d4d;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.addToCartBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  background-color: #ddd;
+  color: #888;
+}
+
 .image {
   width: 120px;
   height: 120px;

@@ -18,7 +18,7 @@ const aboutSection: SchemaTypeDefinition = {
       description: 'Questa scritta NON viene visualizzata nel sito, è possibile usare questo campo per inserire delle note',
     },
     {
-      name: 'data', 
+      name: 'data',
       title: 'Sezioni',
       type: 'array',
       of: [
@@ -41,8 +41,8 @@ const aboutSection: SchemaTypeDefinition = {
             {
               name: 'description',
               title: 'Descrizione',
-              type: 'text', 
-              description: 'Spiegazione', 
+              type: 'text',
+              description: 'Spiegazione',
             },
           ],
         },

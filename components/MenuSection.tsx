@@ -18,6 +18,7 @@ interface MenuItem {
   name: string;
   description: string;
   price: string;
+  availability: boolean;
   image?: { asset: { url: string } } | null;
 }
 
@@ -49,6 +50,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
           name,
           description,
           price,
+          availability,
           image{asset->{url}}
         }
       }[0]`)
@@ -131,27 +133,42 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
       <p className={styles.description}>{menuDescription}</p>
 
       <div className={styles.menuList}>
-        {menuItems.length === 0 ? (
-          <p className={styles.noMenu}>Menu non disponibile</p>
-        ) : (
-          menuItems.map(item => (
-            <div key={item._key} className={styles.menuItem}>
-              {item.image?.asset?.url ? (
-                <Image src={item.image.asset.url} alt={item.name} width={120} height={120} className={styles.image} />
-              ) : (
-                <div className={styles.imagePlaceholder}></div>
-              )}
-              <div className={styles.textContainer}>
-                <h3 className={styles.name}>{item.name}</h3>
-                <p className={styles.description}>{item.description}</p>
-                <p className={styles.price}>€ {item.price}</p>
-                {canOrder && (
-                  <button className={styles.addToCartBtn} onClick={() => addToCart(item)}>Aggiungi all’ordine</button>
+          {menuItems.length === 0 ? (
+            <p className={styles.noMenu}>Menu non disponibile</p>
+          ) : (
+            menuItems.map(item => (
+              <div
+                key={item._key}
+                className={`${styles.menuItem} ${!item.availability ? styles.soldOut : ""}`}
+              >
+                {item.image?.asset?.url ? (
+                  <Image src={item.image.asset.url} alt={item.name} width={120} height={120} className={styles.image} />
+                ) : (
+                  <div className={styles.imagePlaceholder}></div>
+                )}
+
+                <div className={styles.textContainer}>
+                  <h3 className={styles.name}>{item.name}</h3>
+                  <p className={styles.description}>{item.description}</p>
+                  <p className={styles.price}>€ {item.price}</p>
+
+                  {canOrder && (
+                    <button
+                      className={styles.addToCartBtn}
+                      onClick={() => addToCart(item)}
+                      disabled={!item.availability}
+                    >
+                      {item.availability ? "Aggiungi all’ordine" : "Esaurito"}
+                    </button>
+                  )}
+                </div>
+
+                {!item.availability && (
+                  <div className={styles.soldOutBanner}>Esaurito</div>
                 )}
               </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
       </div>
 
       {/* Icona carrello flottante */}
