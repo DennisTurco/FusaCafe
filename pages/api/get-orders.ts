@@ -7,11 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // Data di 24 ore fa
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayISO = yesterday.toISOString();
 
+    // Recupera ordini non rifiutati o consegnati negli ultimi 24h
     const { data: orders, error } = await supabaseClient
       .from("orders")
       .select(`
@@ -24,12 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           sanity_item_id,
           name,
           price,
-          quantity
+          quantity,
+          selected_options
         )
       `)
-      .or(
-        `status.not.in.(rifiutato,consegnato),created_at.gte.${yesterdayISO}`
-      )
+      .or(`status.eq.ricevuto,status.eq.ricevuto,created_at.gte.${yesterdayISO}`)
       .order("created_at", { ascending: false });
 
     if (error) {

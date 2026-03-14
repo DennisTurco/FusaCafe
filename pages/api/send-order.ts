@@ -2,6 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { supabaseServer } from "@/lib/supabaseServer"
 import { supabaseClient } from "@/lib/supabaseClient"
 
+interface IncomingItem {
+  _key: string;
+  name: string;
+  price: string;
+  quantity: number;
+  selectedOptions?: { name: string; price: string }[];
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Metodo non consentito" })
@@ -15,15 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const now = new Date().toISOString()
-
-    const { data: all } = await supabaseServer
-    .from("table_sessions")
-    .select("*")
-
-    console.log("SESSIONI DB:", all)
-
-    console.log("TOKEN RICEVUTO:", token)
-    console.log("NOW:", now)
 
     const { data: session, error: sessionError } = await supabaseClient
       .from("table_sessions")
@@ -51,12 +50,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: "Errore creazione ordine" })
     }
 
-    const orderItems = items.map((item) => ({
+    // Inseriamo anche le opzioni selezionate
+    const orderItems = (items as IncomingItem[]).map((item) => ({
       order_id: order.id,
       sanity_item_id: item._key,
       name: item.name,
       price: item.price,
-      quantity: item.quantity
+      quantity: item.quantity,
+      selected_options: item.selectedOptions || []
     }))
 
     const { error: itemsError } = await supabaseServer

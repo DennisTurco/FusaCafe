@@ -75,6 +75,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     session_id uuid not null references table_sessions(id) on delete restrict,
     table_number int not null, -- is duplicated for the snapshot
     status order_status default 'ricevuto',
+    selected_options jsonb default '[]',
     created_at timestamptz with time zone default now()
   );
   ```

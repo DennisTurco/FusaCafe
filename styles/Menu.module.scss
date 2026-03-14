@@ -17,18 +17,38 @@
 .menuList {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 20px; // distanza tra le categorie (se ogni categoria è un div)
+}
+
+.categorySection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .menuItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 130px 1fr auto; /* immagine - testo - azione */
+  gap: 20px;
+  align-items: start;
   background: var(--menu-card-bg);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px var(--menu-card-shadow);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
   position: relative;
+}
+
+.menuItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: start;
 }
 
 .menuItem.soldOut {
@@ -37,12 +57,12 @@
 
 .soldOutBanner {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   background: #ff4d4d;
   color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
   font-weight: 700;
   font-size: 12px;
 }
@@ -56,15 +76,15 @@
 }
 
 .image {
-  width: 120px;
-  height: 120px;
-  border-radius: 8px;
+  width: 130px;
+  height: 130px;
+  border-radius: 12px;
   object-fit: cover;
-  margin: 0px 15px;
+  transition: transform 0.3s ease;
 }
 
-.textContainer {
-  flex: 1;
+.menuItem:hover .image {
+  transform: scale(1.05);
 }
 
 .name {
@@ -80,10 +100,18 @@
   margin: 5px 0px;
 }
 
+
 .price {
-  font-size: var(--md-body-fs);
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--menu-price);
+  text-align: right;
+}
+
+/* Bottone e prezzo sulla stessa linea */
+.rightActions button.addToCartBtn {
+  width: max-content;
+  white-space: nowrap;
 }
 
 .allergens {
@@ -232,32 +260,68 @@
   background-color: #ff7f50;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-weight: bold;
+  border-radius: 10px; /* più morbido */
+  padding: 10px 16px; /* più spazioso */
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 120px;
 }
 .addToCartBtn:hover {
   background-color: #ff5722;
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .cartIconWrapper {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--primary);
-  color: #fff;
-  width: 60px;
-  height: 60px;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #ff7f50);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.cartIconWrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.rightActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.rightActions .price {
+  text-align: right;
+  white-space: nowrap;       /* impedisce al prezzo di andare a capo */
+  flex-shrink: 0;            /* prezzo non si rimpicciolisce troppo */
+}
+
+.rightActions .addToCartBtn {
+  max-width: 190px;          /* bottone non esce dallo schermo */
+  white-space: nowrap;       /* impedisce al testo di andare a capo */
+  flex-shrink: 0;            /* non si riduce */
+}
+
 
 .cartIcon {
   font-size: 28px;
@@ -304,3 +368,169 @@
   cursor: pointer;
 }
 
+.categoryTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--menu-title);
+  border-bottom: 2px solid var(--menu-card-shadow);
+  padding-bottom: 6px;
+}
+
+/* === Checkbox personalizzati === */
+
+/* Stile checkbox personalizzato */
+.optionLabel {
+  flex: 1 1 48%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+}
+
+.optionLabel input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--menu-card-title);
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.optionLabel input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.optionLabel input[type="checkbox"] {
+  min-width: 25px;
+  min-height: 25px;
+  border-radius: 8px; /* più morbido */
+}
+
+.optionLabel input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, var(--menu-card-title), #ff7f50);
+  border-color: transparent;
+}
+
+.optionLabel input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+.optionLabel:hover input[type="checkbox"] {
+  border-color: var(--menu-price);
+}
+
+/* Container delle opzioni */
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: flex-start;
+}
+
+/* Responsive: schermi piccoli */
+@media (max-width: 480px) {
+
+  .menuItem {
+    display: flex;
+    flex-direction: column; /* impila immagine sopra tutto il resto */
+    grid-template-columns: 80px 1fr; /* immagine + testo sulla stessa riga */
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .firstRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+   .image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--menu-card-title);
+  }
+
+
+   .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .rightActions {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+
+.addToCartBtn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--menu-card-title);
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--menu-price);
+}
+
+  /* Checkbox sopra il pulsante */
+  .optionsContainer {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* allinea a sx */
+    gap: 4px;
+    font-size: 0.8rem;       /* testo più piccolo */
+  }
+
+  .optionLabel {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .optionLabel input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  .addToCartBtn {
+    width: 100%;
+    max-width: none;
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+}

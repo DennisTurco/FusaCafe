@@ -26,6 +26,14 @@ const menu: SchemaTypeDefinition = {
           type: 'object',
           fields: [
             {
+              name: 'category',
+              title: 'Categoria',
+              type: 'reference',
+              to: [{ type: 'menuCategory' }],
+              description: 'Categoria del piatto',
+              validation: (Rule) => Rule.required(),
+            },
+            {
               name: 'name',
               title: 'Nome',
               type: 'string',
@@ -50,6 +58,33 @@ const menu: SchemaTypeDefinition = {
               description: 'Indica se il piatto è disponibile',
             },
             {
+            name: 'options',
+            title: 'Opzioni / Varianti',
+            type: 'array',
+            of: [
+              {
+                type: 'object',
+                fields: [
+                  {
+                    name: 'name',
+                    title: 'Nome opzione',
+                    type: 'string',
+                    description: 'Nome dell’opzione (es. panna montata)',
+                    validation: (Rule) => Rule.required(),
+                  },
+                  {
+                    name: 'price',
+                    title: 'Prezzo aggiuntivo',
+                    type: 'number',
+                    description: 'Sovrapprezzo per questa opzione',
+                    validation: (Rule) => Rule.min(0),
+                  },
+                ],
+              },
+            ],
+            description: 'Opzioni extra per questo piatto, con prezzo aggiuntivo',
+          },
+            {
               name: 'image',
               title: 'Immagine',
               type: 'image',
@@ -61,48 +96,6 @@ const menu: SchemaTypeDefinition = {
       ],
     },
   ],
-  initialValue: {
-    name: 'Menu Caffetteria',
-    description: 'Un assortimento di bevande calde, fredde e dolci per ogni momento della giornata.',
-    data: [
-      {
-        name: 'Caffè Espresso',
-        description: 'Un classico espresso italiano, intenso e aromatico.',
-        price: '1.50',
-        availability: true,
-      },
-      {
-        name: 'Cappuccino',
-        description: 'Espresso con latte montato a vapore e un tocco di cacao.',
-        price: '2.50',
-        availability: true,
-      },
-      {
-        name: 'Latte Macchiato',
-        description: 'Latte caldo con un delicato strato di espresso.',
-        price: '3.00',
-        availability: true,
-      },
-      {
-        name: 'Tè Verde',
-        description: 'Tè verde biologico con note erbacee e rilassanti.',
-        price: '2.00',
-        availability: true,
-      },
-      {
-        name: 'Cornetto alla Crema',
-        description: 'Cornetto sfogliato ripieno di crema pasticcera.',
-        price: '1.80',
-        availability: true,
-      },
-      {
-        name: 'Torta al Cioccolato',
-        description: 'Morbida torta al cioccolato con cuore fondente.',
-        price: '3.50',
-        availability: true,
-      },
-    ],
-  },
 };
 
 export default menu;

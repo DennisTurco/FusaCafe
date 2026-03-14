@@ -28,6 +28,21 @@ interface Pin {
   created_at: string;
 }
 
+interface SelectedOption {
+  id: string;
+  name: string;
+  price: string;
+}
+
+interface OrderItem {
+  id: string;
+  sanity_item_id: string;
+  name: string;
+  price: string;
+  quantity: number;
+  selected_options?: SelectedOption[];
+}
+
 export const DashboardSection: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activePin, setActivePin] = useState<Pin | null>(null);
@@ -157,10 +172,15 @@ export const DashboardSection: React.FC = () => {
       ) : (
         <div className={styles.ordersContainer}>
           {orders.map((order) => {
-            const total = order.order_items.reduce(
-              (sum, i) => sum + parseFloat(i.price) * i.quantity,
-              0
-            );
+            const total = order.order_items.reduce((sum, i) => {
+            const basePrice = parseFloat(i.price);
+            const optionsPrice =
+              (i.selected_options?.reduce(
+                (optSum, opt) => optSum + parseFloat(opt.price),
+                0
+              )) || 0;
+            return sum + (basePrice + optionsPrice) * i.quantity;
+          }, 0);
 
             return (
               <div key={order.id} className={styles.orderCard}>
@@ -179,16 +199,44 @@ export const DashboardSection: React.FC = () => {
                   </span>
                 </div>
 
-                <div className={styles.orderItems}>
-                  {order.order_items.map((item) => (
-                    <div key={item.id} className={styles.itemRow}>
-                      <span>
-                        {item.name} x{item.quantity}
-                      </span>
-                      <span>€ {(parseFloat(item.price) * item.quantity).toFixed(2)}</span>
-                    </div>
-                  ))}
-                </div>
+<div className={styles.orderItems}>
+  {order.order_items.map((item) => {
+    const options = item.selected_options || [];
+    const itemTotal = (
+      parseFloat(item.price) * item.quantity +
+      options.reduce((sum, o) => sum + parseFloat(o.price), 0)
+    ).toFixed(2);
+
+    return (
+      <div key={item.id} className={styles.itemRow}>
+        {/* Sinistra: quantità + nome + opzioni compatte */}
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+            <span style={{ color: '#333', minWidth: '24px', textAlign: 'center' }}>x{item.quantity}</span>
+            <span>{item.name}</span>
+          </div>
+
+          {options.length > 0 && (
+            <div style={{ fontSize: '12px', color: '#555', display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '2px' }}>
+              {options.map((opt, idx) => (
+                <span key={idx}>
+                  {opt.name} (+€ {parseFloat(opt.price).toFixed(2)})
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Destra: prezzo totale */}
+        <div style={{ fontWeight: 700, fontSize: '14px', marginLeft: '12px' }}>
+          € {itemTotal}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
 
                 <div className={styles.orderFooter}>
                   <span>Totale: € {total.toFixed(2)}</span>
