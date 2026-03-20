@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { supabaseClient } from "@/lib/supabaseClient";
+import { supabaseServer } from "@/lib/supabaseServer";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "GET") {
@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const {data, error} = await supabaseClient.rpc("get_new_active_pin");
+        const {data, error} = await supabaseServer.rpc("get_new_active_pin");
 
         if (error) {
             return res.status(500).json({ valid: false });

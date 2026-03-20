@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { supabaseClient } from "@/lib/supabaseClient";
+import { supabaseServer } from "@/lib/supabaseServer";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const yesterdayISO = yesterday.toISOString();
 
     // Recupera ordini non rifiutati o consegnati negli ultimi 24h
-    const { data: orders, error } = await supabaseClient
+    const { data: orders, error } = await supabaseServer
       .from("orders")
       .select(`
         id,

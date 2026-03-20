@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { supabaseClient } from "@/lib/supabaseClient"
+import { supabaseServer } from "@/lib/supabaseServer"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { data, error } = await supabaseClient
+    const { data, error } = await supabaseServer
       .rpc("check_valid_session", { p_token: token });
 
     if (error) {

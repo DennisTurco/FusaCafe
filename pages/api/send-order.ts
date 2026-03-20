@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { supabaseServer } from "@/lib/supabaseServer"
-import { supabaseClient } from "@/lib/supabaseClient"
 
 interface IncomingItem {
   _key: string;
@@ -29,10 +28,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: "Note troppo lunghe (max 100 caratteri)" })
   }
 
+  if (!items.every(i => i.name && i.quantity > 0)) {
+    return res.status(400).json({ error: "Dati non validi" })
+  }
+
   try {
     const now = new Date().toISOString()
 
-    const { data: session, error: sessionError } = await supabaseClient
+    const { data: session, error: sessionError } = await supabaseServer
       .from("table_sessions")
       .select("*")
       .eq("token", token)

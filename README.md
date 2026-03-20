@@ -102,17 +102,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   ```sql
   alter table orders enable row level security;
   alter table order_items enable row level security;
+  alter table table_sessions enable row level security;
+  alter table pins enable row level security;
 
-  create policy "Insert orders with valid token" on orders for insert with check (true);
-  create policy "Insert order items" on order_items for insert with check (true);
-  create policy "Allow select for anon" on pins for select using (true);
-  create policy "Allow select for anon" on table_sessions for select using (true);
-  create policy "Allow insert for anon" on "public"."table_sessions" to public with check (true);
-  create policy "Allow select for anon" on orders for select using (true);
-  create policy "Allow select for anon" on order_items for select using (true);
-  create policy "Allow select by token" on table_sessions for select using (true);
-  create policy "allow server write" on table_sessions for all using (true) with check (true);
-  create policy "Allow update orders" on orders for update using (true) with check (true);
+    -- orders
+  create policy "deny all orders" on orders for all using (false) with check (false);
+
+  -- order_items
+  create policy "deny all order_items" on order_items for all using (false) with check (false);
+
+  -- table_sessions
+  create policy "deny all sessions" on table_sessions for all using (false) with check (false);
+
+  create policy "public can read pins" on pins for select using (true);
   ```
 
 * Functions
