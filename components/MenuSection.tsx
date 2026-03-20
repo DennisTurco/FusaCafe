@@ -47,6 +47,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedOptionsMap, setSelectedOptionsMap] = useState<Record<string, Option[]>>({});
+  const [orderNotes, setOrderNotes] = useState("");
 
   useEffect(() => {
     client.fetch(`*[_type == "menuItem"][0]{
@@ -136,42 +137,43 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   }
 
   async function sendOrder() {
-  const token = localStorage.getItem("table_token");
-  if (!token) {
-    toast.error("Sessione non valida");
-    return;
+    const token = localStorage.getItem("table_token");
+    if (!token) {
+      toast.error("Sessione non valida");
+      return;
+    }
+
+    if (cart.length === 0) {
+      toast.error("Il carrello è vuoto");
+      return;
+    }
+
+    // Mappiamo correttamente cart includendo selectedOptions
+    const itemsForOrder = cart.map(item => ({
+      _key: item._key,
+      name: item.name,
+      quantity: item.quantity,
+      price: parseFloat(item.price.replace(",", ".")),
+      selectedOptions: item.selectedOptions || []
+    }));
+
+    const res = await fetch("/api/send-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, items: itemsForOrder, notes: orderNotes }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      toast.success("Ordine inviato!");
+      setCart([]);
+      setIsCartOpen(false);
+      setOrderNotes("");
+    } else {
+      toast.error(data.error || "Errore invio ordine");
+    }
   }
-
-  if (cart.length === 0) {
-    toast.error("Il carrello è vuoto");
-    return;
-  }
-
-  // Mappiamo correttamente cart includendo selectedOptions
-  const itemsForOrder = cart.map(item => ({
-    _key: item._key,
-    name: item.name,
-    quantity: item.quantity,
-    price: parseFloat(item.price.replace(",", ".")),
-    selectedOptions: item.selectedOptions || []
-  }));
-
-  const res = await fetch("/api/send-order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token, items: itemsForOrder }),
-  });
-
-  const data = await res.json();
-
-  if (res.ok) {
-    toast.success("Ordine inviato!");
-    setCart([]);
-    setIsCartOpen(false);
-  } else {
-    toast.error(data.error || "Errore invio ordine");
-  }
-}
 
   const cartTotal = cart.reduce((sum, item) => {
     const basePrice = parseFloat(item.price.replace(",", "."));
@@ -289,6 +291,22 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
               </div>
             </div>
           ))}
+          <div className={styles.notesContainer}>
+            <label>Note per la cucina</label>
+            <textarea
+                placeholder=""
+                value={orderNotes}
+                onChange={(e) => {
+                  const value = e.target.value.slice(0, 100);
+                  setOrderNotes(value);
+                }}
+                maxLength={100}
+                className={styles.notesInput}
+              />
+            <div className={styles.notesCounter}>
+              {orderNotes.length}/100
+            </div>
+          </div>
           <div className={styles.cartTotal}>
             <span>Totale:</span>
             <strong>€ {cartTotal.toFixed(2)}</strong>

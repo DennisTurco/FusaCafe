@@ -17,6 +17,7 @@ interface Order {
   table_number: number;
   status: OrderStatus;
   created_at: string;
+  notes?: string | null;
   order_items: OrderItem[];
 }
 
@@ -183,21 +184,22 @@ export const DashboardSection: React.FC = () => {
           }, 0);
 
             return (
-              <div key={order.id} className={styles.orderCard}>
+              <div key={order.id} className={`${styles.orderCard} ${order.notes ? styles.hasNotes : ""}`}>
                 <div className={styles.orderHeader}>
-                  <span>Tavolo #{order.table_number}</span>
-                  <span>
-                    {new Date(order.created_at).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                  <span
-                    className={`${styles.statusBadge} ${styles["status-" + order.status]}`}
-                  >
-                    {order.status.replace("_", " ").toUpperCase()}
-                  </span>
-                </div>
+  <div>
+    <strong>Tavolo #{order.table_number}</strong>
+    <div className={styles.orderTime}>
+      {new Date(order.created_at).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}
+    </div>
+  </div>
+
+  <span className={`${styles.statusBadge} ${styles["status-" + order.status]}`}>
+    {order.status}
+  </span>
+</div>
 
 <div className={styles.orderItems}>
   {order.order_items.map((item) => {
@@ -236,7 +238,15 @@ export const DashboardSection: React.FC = () => {
   })}
 </div>
 
-
+{order.notes && (
+  <div className={styles.orderNotes}>
+    <span className={styles.notesIcon}>⚠️</span>
+    <div>
+      <strong>Note:</strong>
+      <p>{order.notes}</p>
+    </div>
+  </div>
+)}
 
                 <div className={styles.orderFooter}>
                   <span>Totale: € {total.toFixed(2)}</span>

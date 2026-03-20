@@ -26,7 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           price,
           quantity,
           selected_options
-        )
+        ),
+        notes
       `)
       .or(`status.eq.ricevuto,status.eq.ricevuto,created_at.gte.${yesterdayISO}`)
       .order("created_at", { ascending: false });

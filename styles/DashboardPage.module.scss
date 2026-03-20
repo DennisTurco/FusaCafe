@@ -157,3 +157,34 @@
   cursor: pointer;
   font-weight: 600;
 }
+
+.orderNotes {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+
+  background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+  border-left: 5px solid #f59e0b;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  font-size: 0.9rem;
+  color: #333;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.notesIcon {
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.orderNotes p {
+  margin: 2px 0 0;
+}
+
+.hasNotes {
+  border: 2px solid #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}

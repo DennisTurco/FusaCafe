@@ -15,10 +15,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: "Metodo non consentito" })
   }
 
-  const { token, items } = req.body
+  const { token, items, notes } = req.body
 
   if (!token || !Array.isArray(items) || items.length === 0) {
     return res.status(400).json({ error: "Token o ordine non valido" })
+  }
+
+  if (notes && typeof notes !== "string") {
+    return res.status(400).json({ error: "Note non valide" })
+  }
+
+  if (notes && notes.length > 100) {
+    return res.status(400).json({ error: "Note troppo lunghe (max 100 caratteri)" })
   }
 
   try {
@@ -40,7 +48,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .insert({
         table_number: session.table_number,
         session_id: session.id,
-        status: "ricevuto"
+        status: "ricevuto",
+        notes: notes?.trim() || null
       })
       .select("*")
       .maybeSingle()

@@ -75,9 +75,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     session_id uuid not null references table_sessions(id) on delete restrict,
     table_number int not null, -- is duplicated for the snapshot
     status order_status default 'ricevuto',
-    selected_options jsonb default '[]',
+    notes text null,
     created_at timestamptz with time zone default now()
   );
+  alter table orders
+  add constraint notes_length_check
+  check (char_length(notes) <= 200);
   ```
 
 * order_items table
@@ -89,7 +92,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     sanity_item_id text not null,
     [name] text not null,
     price numeric(6,2) not null,
-    quantity int default 1
+    quantity int default 1,
+    selected_options jsonb default '[]'
   );
   ```
 
