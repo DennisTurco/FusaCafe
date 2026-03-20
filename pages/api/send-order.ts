@@ -55,7 +55,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .maybeSingle()
 
     if (!order || orderError) {
-      console.error(orderError)
       return res.status(500).json({ error: "Errore creazione ordine" })
     }
 
@@ -74,7 +73,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .insert(orderItems)
 
     if (itemsError) {
-      console.error(itemsError)
       return res.status(500).json({ error: "Errore inserimento articoli" })
     }
 
@@ -82,8 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       success: true,
       orderId: order.id
     })
-  } catch (err) {
-    console.error(err)
+  } catch {
     return res.status(500).json({ error: "Errore server" })
   }
 }

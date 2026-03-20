@@ -39,7 +39,6 @@ const ContactForm = () => {
 
         // Verifica che le variabili non siano undefined
         if (!serviceId || !templateId || !userId) {
-            console.error("Missing required EmailJS environment variables.");
             setFormStatus({
                 success: false,
                 errorMessage: "Si è verificato un errore di configurazione. Riprova più tardi.",

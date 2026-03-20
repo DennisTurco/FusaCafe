@@ -29,7 +29,6 @@ export default async function handler(
       })
 
     if (error) {
-      console.error(error)
       return res.status(500).json({ error: error.message })
     }
 
@@ -38,8 +37,7 @@ export default async function handler(
       valid_from: validFrom,
       valid_to: validTo,
     })
-  } catch (err) {
-    console.error("Generate pin error:", err)
+  } catch {
     return res.status(500).json({ error: "Server error" })
   }
 }

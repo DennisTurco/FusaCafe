@@ -15,13 +15,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .eq("id", orderId);
 
     if (error) {
-      console.error("Errore update-order-status:", error);
       return res.status(500).json({ error: "Errore aggiornamento stato" });
     }
 
     return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error("Errore server:", err);
+  } catch {
     return res.status(500).json({ error: "Errore server" });
   }
 }

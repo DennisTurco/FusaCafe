@@ -53,7 +53,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .single()
 
       if (error) {
-        console.error(error)
         return res.status(500).json({ error: "Errore creazione sessione" })
       }
 
@@ -71,14 +70,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .eq("id", existingSession.id)
 
     if (updateError) {
-      console.error(updateError)
       return res.status(500).json({ error: "Errore aggiornamento sessione" })
     }
 
     return res.status(200).json({ token })
 
-  } catch (err) {
-    console.error("Errore server:", err)
+  } catch {
     return res.status(500).json({ error: "Errore server" })
   }
 }

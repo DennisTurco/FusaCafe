@@ -53,16 +53,15 @@ export default function HomePage() {
           `*[_type == "aboutSection"][0]{ title, description, data[] { title, description, image { asset -> { url } } } }`
         );
         setAboutData(about);
-  
+
         const why = await client.fetch<WhyData>(
           `*[_type == "whyData"][0]{ title, description, data }`
         );
         setWhyData(why);
-      } catch (error) {
-        console.error("Error fetching data from Sanity:", error);
+      } catch {
       }
     };
-  
+
     fetchData();
   }, []);
 

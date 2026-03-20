@@ -10,7 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const {data, error} = await supabaseClient.rpc("get_new_active_pin");
 
         if (error) {
-            console.error(error);
             return res.status(500).json({ valid: false });
         }
 
@@ -27,8 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             valid_to: pin.valid_to,
             created_at: pin.created_at
         });
-    } catch (err) {
-        console.error("Obtaining pin server error: ", err);
+    } catch {
         return res.status(500).json({ valid: false });
     }
 }

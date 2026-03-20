@@ -26,13 +26,10 @@ const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, c
       const imageUrl = builder.image(source).url();
       return imageUrl;
     }
-    console.log("No URL or _ref found in the asset");
     return "";
   };
 
   const imageUrl = image ? urlFor(image) : "";
-
-  console.log("Image URL in WhyCard: ", imageUrl);  // Log the image URL for debugging
 
   return (
     <div className={styles.container}>

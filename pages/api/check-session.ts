@@ -17,7 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .rpc("check_valid_session", { p_token: token });
 
     if (error) {
-      console.error(error);
       return res.status(500).json({ valid: false });
     }
 
@@ -36,8 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
 
-  } catch (err) {
-    console.error("Check-session server error:", err)
+  } catch {
     return res.status(500).json({ valid: false })
   }
 }

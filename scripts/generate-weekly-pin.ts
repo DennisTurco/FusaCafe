@@ -28,9 +28,6 @@ function generatePin() {
   });
 
   if (error) {
-    console.error("Error on PIN creation:", error);
     process.exit(1);
   }
-
-  console.log(`PIN created succesfully: ${pin}`);
 })();

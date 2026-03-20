@@ -33,13 +33,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("Errore get-orders:", error);
       return res.status(500).json({ error: "Errore recupero ordini" });
     }
 
     return res.status(200).json(orders);
-  } catch (err) {
-    console.error("Errore server:", err);
+  } catch {
     return res.status(500).json({ error: "Errore server" });
   }
 }

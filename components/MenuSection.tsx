@@ -70,7 +70,7 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
       setMenuItems(menuData?.data || []);
       setLoading(false);
     })
-    .catch(console.error);
+    .catch();
   }, []);
 
   const itemsByCategory = menuItems.reduce((acc, item) => {

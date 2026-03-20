@@ -40,8 +40,7 @@ export default function Menu() {
         clearSessionToken()
         setCanOrder(false)
       }
-    } catch (err) {
-      console.error("Errore verifica sessione:", err)
+    } catch {
       setCanOrder(false)
     }
   }

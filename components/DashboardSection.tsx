@@ -70,8 +70,7 @@ export const DashboardSection: React.FC = () => {
         setActivePin(null);
       }
 
-    } catch (err) {
-      console.error("get-pin error:", err);
+    } catch {
     }
   };
 
@@ -90,8 +89,7 @@ export const DashboardSection: React.FC = () => {
       setOrders(data);
       prevOrdersRef.current = data;
       setLoading(false);
-    } catch (err) {
-      console.error("Errore get-orders:", err);
+    } catch {
       toast.error("Errore caricamento ordini");
     }
   };
@@ -106,8 +104,7 @@ export const DashboardSection: React.FC = () => {
 
       toast.success("Nuovo PIN generato");
       fetchPin();
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Errore rigenerazione PIN");
     }
   };
@@ -133,8 +130,7 @@ export const DashboardSection: React.FC = () => {
       if (!res.ok) throw new Error("Errore aggiornamento stato");
       toast.success("Stato aggiornato!");
       fetchOrders(); // Aggiorna lista ordini
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Errore aggiornamento stato");
     }
   };
