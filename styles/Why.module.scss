@@ -6,7 +6,8 @@
   margin-bottom: 24px;
   background-color: var(--services-card-bg);
   color: var(--services-card-text);
-  height: 400px;
+  min-height: 320px;
+  height: auto;
   border-radius: 40px;
   transition: all 0.4s ease-in-out; // Transizione fluida
 
@@ -105,11 +106,16 @@
 }
 
 .why_card_container {
+  display: grid;
+  gap: 30px;
+  justify-items: center;
+
+  @media (min-width: $media-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   @media (min-width: $media-desktop) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px 30px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 

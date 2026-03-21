@@ -68,7 +68,7 @@ const Why: React.FC<WhyProps> = ({ whyData, fadeIn, client }) => {
         <p className={styles.text}>{whyData.description}</p>
       </div>
       <div className={styles.why_card_container}>
-        {whyData.data.map((data, key) => (
+        {whyData.data.slice(0, 4).map((data, key) => (
           <WhyCard key={key} {...data} client={client} />
         ))}
       </div>

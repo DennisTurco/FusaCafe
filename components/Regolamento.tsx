@@ -23,5 +23,5 @@ const Regolamento = () => {
       </section>
     );
   };
-  
+
   export default Regolamento;

@@ -17,7 +17,7 @@ const why: SchemaTypeDefinition = {
     },
     {
       name: 'data',
-      title: 'Servizi (Max 3)',
+      title: 'Servizi (Max 4)',
       type: 'array',
       of: [
         {
@@ -53,7 +53,7 @@ const why: SchemaTypeDefinition = {
       ],
 
       // Limitiamo a 3 voci esatte
-      validation: Rule => Rule.length(3).error('You must have exactly 3 items in this list.'),
+      // validation: Rule => Rule.length(4).error('You must have exactly 4 items in this list.'),
 
       // default description
       //Oltre alla nostra selezione di bevande e piatti di caffetteria, siamo felici di offrire ai nostri ospiti una gamma di servizi extra pensati per arricchire la loro esperienza. Tra questi, potrete trovare:

@@ -105,7 +105,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   alter table table_sessions enable row level security;
   alter table pins enable row level security;
 
-    -- orders
+  -- orders
   create policy "deny all orders" on orders for all using (false) with check (false);
 
   -- order_items
