@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { supabaseServer } from "@/lib/supabaseServer";
+import { supabaseClient } from "@/lib/supabaseClient";
 import styles from "../styles/LoginPage.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -14,7 +14,7 @@ export const LoginPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabaseServer.auth.signInWithPassword({
+    const { error } = await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
