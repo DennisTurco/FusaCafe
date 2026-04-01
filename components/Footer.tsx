@@ -28,10 +28,10 @@ export const Footer = () => {
             </div>
 
             <div className={styles.social_container}>
-                <Link href="https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr" target="blank">
+                <Link href="https://www.facebook.com/share/1BZ7GFqEjj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
                     <RiFacebookCircleLine size={32} className={styles.social_link} />
                 </Link>
-                <Link href="https://www.instagram.com/fusa_e_caffe/" target="blank">
+                <Link href="https://www.instagram.com/fusa_e_caffe/" target="_blank" rel="noopener noreferrer">
                     <RiInstagramLine size={32} className={styles.social_link} />
                 </Link>
             </div>
@@ -48,17 +48,17 @@ export const Footer = () => {
 
             <div className="flex flex-wrap justify-center items-center gap-8 mt-6">
                 <a href="https://www.caffevergnano.com" target="_blank" rel="noopener noreferrer">
-                    <img 
-                        src="https://caffevergnano-static.kxscdn.com/wp-content/uploads/2021/04/logo_vergnano.png" 
-                        alt="Caffè Vergnano" 
+                    <img
+                        src="https://caffevergnano-static.kxscdn.com/wp-content/uploads/2021/04/logo_vergnano.png"
+                        alt="Caffè Vergnano"
                         className="h-12 md:h-16 transition-transform hover:scale-110"
                         loading="lazy"
                     />
                 </a>
                 <a href="https://www.exclusion.it" target="_blank" rel="noopener noreferrer">
-                    <img 
-                        src="https://exclusion.it/wp-content/uploads/2017/07/exclusion_logo_bianco.png" 
-                        alt="Exclusion Pet Food" 
+                    <img
+                        src="https://exclusion.it/wp-content/uploads/2017/07/exclusion_logo_bianco.png"
+                        alt="Exclusion Pet Food"
                         className="h-12 md:h-16 transition-transform hover:scale-110"
                         loading="lazy"
                     />
@@ -67,6 +67,10 @@ export const Footer = () => {
 
             <div className={styles.copyright_wrapper}>
                 <Copyright />
+            </div>
+
+            <div className="mt-3 text-sm text-center">
+                <Link href="/privacy">Privacy Policy</Link> | <Link href="/cookie">Cookie Policy</Link>
             </div>
         </footer>
     );

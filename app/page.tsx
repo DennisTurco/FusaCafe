@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { Navbar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
+import { CookieBanner } from "../components/CookieBanner";
 import Hero from "../components/HeroSection2";
 import WhySection from "../components/Why";
 import AboutSection from "../components/AboutSection";
@@ -100,7 +101,8 @@ export default function HomePage() {
         <Footer />
       </motion.div>
 
-      
+      <CookieBanner />
+
     </div>
   );
 }

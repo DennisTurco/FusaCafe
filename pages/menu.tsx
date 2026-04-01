@@ -8,7 +8,7 @@ import Hero from "../components/Hero"
 import MenuSection from "../components/MenuSection"
 import PrenotaButtonOverlay from "../components/PrenotaButtonOverlay"
 import PinModal from "../components/PinModal"
-import styles from "../styles/MenuPage.module.scss"
+// import styles from "../styles/MenuPage.module.scss"
 import { motion } from "framer-motion"
 import { getSessionToken, clearSessionToken } from "../lib/session"
 
@@ -48,11 +48,11 @@ export default function Menu() {
   checkSession()
 }, [])
 
-  function handleOrderClick() {
-    if (!canOrder) {
-      setShowPinModal(true)
-    }
-  }
+  // function handleOrderClick() {
+  //   if (!canOrder) {
+  //     setShowPinModal(true)
+  //   }
+  // }
 
   return (
     <div>
@@ -63,7 +63,7 @@ export default function Menu() {
         <Hero imagePath="/images/menuBanner.webp" title="" />
       </section>
 
-      <div style={{ textAlign: "center", margin: "30px 0" }}>
+      {/* <div style={{ textAlign: "center", margin: "30px 0" }}>
         {!canOrder && (
           <button
             onClick={handleOrderClick}
@@ -72,7 +72,7 @@ export default function Menu() {
             Ordina al Tavolo
           </button>
         )}
-      </div>
+      </div> */}
 
       <motion.div initial="hidden" whileInView="visible">
         <MenuSection canOrder={canOrder} />
