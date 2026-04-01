@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react"
 import "/styles/global.scss"
-import { Navbar } from "../components/NavBar"
-import { Footer } from "../components/Footer"
-import Hero from "../components/Hero"
-import MenuSection from "../components/MenuSection"
-import PrenotaButtonOverlay from "../components/PrenotaButtonOverlay"
-import PinModal from "../components/PinModal"
+import { Navbar } from "../../components/NavBar"
+import { Footer } from "../../components/Footer"
+import Hero from "../../components/Hero"
+import MenuSection from "../../components/MenuSection"
+import PrenotaButtonOverlay from "../../components/PrenotaButtonOverlay"
+import PinModal from "../../components/PinModal"
 // import styles from "../styles/MenuPage.module.scss"
 import { motion } from "framer-motion"
-import { getSessionToken, clearSessionToken } from "../lib/session"
+import { getSessionToken, clearSessionToken } from "../../lib/session"
 
 export default function Menu() {
   const [showPinModal, setShowPinModal] = useState(false)

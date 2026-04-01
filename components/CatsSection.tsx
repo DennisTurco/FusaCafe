@@ -58,8 +58,8 @@ export default function CatsSection({ client }: CatsSectionProps) {
           <p className={styles.noCats}>Al momento non ci sono gatti disponibili.</p>
         ) : (
           <div className={styles.grid}>
-            {sezione?.data?.map((gatto) => (
-              <div key={gatto._id} className={styles.card}>
+            {sezione?.data?.map((gatto, index) => (
+              <div key={gatto._id ?? index} className={styles.card}>
                 {gatto.foto?.asset?.url ? (
                   <Image
                     src={gatto.foto.asset.url}
