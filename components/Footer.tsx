@@ -72,6 +72,15 @@ export const Footer = () => {
             <div className="mt-3 text-sm text-center">
                 <Link href="/privacy">Privacy Policy</Link> | <Link href="/cookie">Cookie Policy</Link>
             </div>
+
+            <button
+                onClick={() => {
+                    localStorage.removeItem("cookie_consent");
+                    location.reload();
+                }}
+                >
+                Modifica consenso cookie
+                </button>
         </footer>
     );
 };

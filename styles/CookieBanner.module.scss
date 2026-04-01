@@ -34,4 +34,10 @@
       opacity: 0.9;
     }
   }
+
+  .buttons {
+    display: flex;
+    gap: 12px; // distanza tra Accetta e Rifiuta
+    margin-top: 10px;
+    }
 }
