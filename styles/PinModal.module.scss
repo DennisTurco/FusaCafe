@@ -1,0 +1,64 @@
+@use "resolution" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--menu-card-bg);
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px var(--menu-card-shadow);
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal h2 {
+  font-size: var(--xl-header-fs);
+  font-weight: 700;
+  color: var(--menu-title);
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.modal input {
+  padding: 10px 12px;
+  font-size: var(--md-body-fs);
+  border: 1px solid var(--menu-card-shadow);
+  border-radius: 6px;
+  outline: none;
+  background: var(--menu-input-bg, #fff);
+  color: var(--menu-card-title);
+}
+
+.modal button {
+  padding: 12px;
+  font-size: var(--md-body-fs);
+  font-weight: 600;
+  background: var(--menu-card-title);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal button:hover {
+  background: var(--menu-card-title);
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: var(--sm-body-fs);
+  text-align: center;
+  margin: 0;
+}

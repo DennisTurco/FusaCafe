@@ -8,13 +8,13 @@ import { WhyData } from "../components/types";
 interface WhyCardProps {
   title: string;
   image?: {
-    asset?: { 
+    asset?: {
       _ref?: string;
       url?: string;
     };
   };
   description: string;
-  altText?: string; 
+  altText?: string;
   client: SanityClient;
 }
 
@@ -26,13 +26,10 @@ const WhyCard: React.FC<WhyCardProps> = ({ title, image, description, altText, c
       const imageUrl = builder.image(source).url();
       return imageUrl;
     }
-    console.log("No URL or _ref found in the asset");
-    return "";  
+    return "";
   };
 
   const imageUrl = image ? urlFor(image) : "";
-
-  console.log("Image URL in WhyCard: ", imageUrl);  // Log the image URL for debugging
 
   return (
     <div className={styles.container}>
@@ -71,7 +68,7 @@ const Why: React.FC<WhyProps> = ({ whyData, fadeIn, client }) => {
         <p className={styles.text}>{whyData.description}</p>
       </div>
       <div className={styles.why_card_container}>
-        {whyData.data.map((data, key) => (
+        {whyData.data.slice(0, 4).map((data, key) => (
           <WhyCard key={key} {...data} client={client} />
         ))}
       </div>

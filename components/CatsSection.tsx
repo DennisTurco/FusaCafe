@@ -32,16 +32,14 @@ export default function CatsSection({ client }: CatsSectionProps) {
     client
       .fetch(`*[_type == "gatti"]{name, description, data[]{_id, nome, sesso, eta, foto{asset->{url}}, descrizione}}`)
       .then((data) => {
-        console.log("Dati ricevuti:", data);
         if (data.length > 0) {
-          setSezione(data[0]); 
+          setSezione(data[0]);
         } else {
           setSezione({ name: "Gatti Disponibili", description: "Non ci sono gatti disponibili", data: [] });
         }
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Errore nel caricamento:", err);
+      .catch(() => {
         setError("Errore nel caricamento dei dati.");
         setLoading(false);
       });
@@ -60,8 +58,8 @@ export default function CatsSection({ client }: CatsSectionProps) {
           <p className={styles.noCats}>Al momento non ci sono gatti disponibili.</p>
         ) : (
           <div className={styles.grid}>
-            {sezione?.data?.map((gatto) => (
-              <div key={gatto._id} className={styles.card}>
+            {sezione?.data?.map((gatto, index) => (
+              <div key={gatto._id ?? index} className={styles.card}>
                 {gatto.foto?.asset?.url ? (
                   <Image
                     src={gatto.foto.asset.url}

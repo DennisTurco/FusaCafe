@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 // import { Analytics } from "@vercel/analytics/react";
 // import { SpeedInsights } from "@vercel/speed-insights/next"
+import CookieBanner from "@/components/CookieBanner";
 import Script from "next/script";
 import "/styles/global.scss";
 
@@ -100,8 +101,43 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         /> */}
 
+        <Script
+          id="ga-consent-loader"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function loadAnalytics(){
+                if(window.gaLoaded) return;
+                window.gaLoaded = true;
+
+                const script = document.createElement('script');
+                script.src="https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}";
+                script.async=true;
+                document.head.appendChild(script);
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  anonymize_ip: true
+                });
+              }
+
+              // già accettato
+              if(localStorage.getItem('cookie_consent')==='accepted'){
+                loadAnalytics();
+              }
+
+              // dopo click banner
+              window.addEventListener('cookieAccepted', loadAnalytics);
+            `,
+          }}
+        />
+
         {/* Per peggiorare il SEO */}
-        <Script id="delayed-google-analytics" strategy="afterInteractive" dangerouslySetInnerHTML={{ 
+        {/* <Script id="delayed-google-analytics" strategy="afterInteractive" dangerouslySetInnerHTML={{ 
           __html: `
             window.onload = function () {
               setTimeout(() => {
@@ -121,10 +157,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
               }, 5000);
             };
           `
-        }} />
+        }}  /> */}
       </head>
       <body className={GeistSans.className} suppressHydrationWarning={true}>
         {children}
+
+        <CookieBanner />
         {/* Vercel Analytics */}
         {/*<Analytics />*/}
 

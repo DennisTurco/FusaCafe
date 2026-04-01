@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import WhatsAppBooking from './WhatsAppBooking';
 import { FaWhatsapp } from 'react-icons/fa';

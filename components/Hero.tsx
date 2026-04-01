@@ -14,7 +14,7 @@ const Hero = ({imagePath, title}: HeroProps) => {
             <div className="absolute inset-0 bg-black opacity-40"></div>
             <div className="absolute inset-0 flex justify-center items-center text-center text-white">
                 <h1 className="text-5xl font-extrabold">{title}</h1>
-            </div> 
+            </div>
         </section>
     );
 };
