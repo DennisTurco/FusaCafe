@@ -12,7 +12,6 @@ const PrivacyPage = () => (
       Ragione Sociale: FUSA & CAFFE&apos; DI ELIANA TANZI<br />
       Indirizzo: STRADA MASSIMO D&apos;AZEGLIO 72/E - 43125 - PARMA (PR)<br />
       Partita IVA: 03106370343<br />
-      Codice Fiscale: TNZLNE*****B034R<br />
       PEC: eliana.tanzi@pec.it<br />
       Forma giuridica: DI<br />
       Codice destinatario: 0000000
