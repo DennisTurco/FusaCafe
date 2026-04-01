@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const PrivacyPage = () => (
   <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
     <h1>Informativa Privacy</h1>
@@ -88,7 +90,7 @@ const PrivacyPage = () => (
     <p>
       Il sito utilizza cookie tecnici e cookie analitici solo previo consenso
       dell&apos;utente espresso tramite banner cookie. Per maggiori informazioni
-      consultare la <a href="/cookie">Cookie Policy</a>.
+      consultare la <Link href="/cookie">Cookie Policy</Link>.
     </p>
 
     <p style={{ marginTop: "2rem", fontSize: "0.9rem" }}>
