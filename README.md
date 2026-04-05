@@ -28,6 +28,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
     SUPABASE_SERVICE_ROLE_KEY=...
     ```
 
+* for github actions:
+
+  ```bash
+  npm install -D ts-node typescript
+  ```
+
 * Run the development server:
 
     ```bash
