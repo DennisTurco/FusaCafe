@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next-sitemap",
+    "build:scripts": "tsc -p tsconfig.scripts.json",
     "start": "next start",
     "lint": "next lint"
   },

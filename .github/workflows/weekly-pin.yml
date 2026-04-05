@@ -18,7 +18,9 @@ jobs:
 
       - run: npm ci
 
-      - run: node --loader ts-node/esm scripts/generate-weekly-pin.ts
+      - run: npm run build:scripts
+
+      - run: node dist/scripts/generate-weekly-pin.js
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
