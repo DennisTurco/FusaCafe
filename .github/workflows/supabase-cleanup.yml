@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Cleanup old Supabase data
         run: |
-          curl -X POST "${{ secrets.SUPABASE_URL }}/rest/v1/rpc/cleanup_old_data" \
+          curl -X POST "${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}/rest/v1/rpc/cleanup_old_data" \
             -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
             -H "Content-Type: application/json"
