@@ -20,6 +20,8 @@ jobs:
 
       - run: npm run build:scripts
 
+      - run: ls -R dist
+
       - run: node dist/scripts/generate-weekly-pin.js
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
