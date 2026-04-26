@@ -77,7 +77,10 @@ const menu: SchemaTypeDefinition = {
                     title: 'Prezzo aggiuntivo',
                     type: 'number',
                     description: 'Sovrapprezzo per questa opzione',
-                    validation: (Rule) => Rule.min(0),
+                     validation: (Rule) =>
+                      Rule.required()
+                        .min(0)
+                        .error('Il prezzo deve essere >= 0'),
                   },
                 ],
               },

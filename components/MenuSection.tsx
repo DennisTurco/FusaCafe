@@ -96,36 +96,51 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
     });
   }
 
+
+  function getOptionsKey(options: Option[]) {
+    return options
+      .map(o => `${o.name}:${o.price ?? 0}`)
+      .sort()
+      .join("|");
+  }
+
   // Aggiungi al carrello
   function addToCart(item: MenuItem) {
-    const selectedOptions = selectedOptionsMap[item._key] || [];
+  const selectedOptions = selectedOptionsMap[item._key] || [];
+  const optionsKey = getOptionsKey(selectedOptions);
 
-    setCart(prev => {
-      const existing = prev.find(i =>
+  setCart(prev => {
+    const existing = prev.find(i =>
+      i._key === item._key &&
+      getOptionsKey(i.selectedOptions || []) === optionsKey
+    );
+
+    if (existing) {
+      return prev.map(i =>
         i._key === item._key &&
-        JSON.stringify(i.selectedOptions) === JSON.stringify(selectedOptions)
+        getOptionsKey(i.selectedOptions || []) === optionsKey
+          ? { ...i, quantity: i.quantity + 1 }
+          : i
       );
+    }
 
-      if (existing) {
-        return prev.map(i =>
-          i._key === existing._key &&
-          JSON.stringify(i.selectedOptions) === JSON.stringify(selectedOptions)
-            ? { ...i, quantity: i.quantity + 1 }
-            : i
-        );
-      } else {
-        return [...prev, { ...item, quantity: 1, selectedOptions }];
-      }
-    });
+    return [
+      ...prev,
+      {
+        ...item,
+        quantity: 1,
+        selectedOptions,
+      },
+    ];
+  });
 
-    toast.dismiss();
-    toast.success(`${item.name} aggiunto al carrello!`, {
-      duration: 1500,
-      style: { background: "#4CAF50", color: "#fff", borderRadius: "8px", padding: "12px 18px", fontWeight: "500" },
-    });
+  toast.success(`${item.name} aggiunto al carrello!`);
 
-    setSelectedOptionsMap(prev => ({ ...prev, [item._key]: [] }));
-  }
+  setSelectedOptionsMap(prev => ({
+    ...prev,
+    [item._key]: [],
+  }));
+}
 
   function removeFromCart(itemKey: string) {
     setCart(prev => prev.filter(i => i._key !== itemKey));
