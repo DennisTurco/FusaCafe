@@ -43,7 +43,9 @@
 .logo {
   width: 55px;
   height: auto;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out, max-height 0.3s ease-in-out;
+  max-height: 55px;
+  overflow: hidden;
 
   &:hover {
     transform: scale(1.25);
@@ -54,6 +56,31 @@
   font-size: 1.4rem;
   font-weight: bold;
   color: var(--navbar-text); /* Colore del testo nell'intestazione */
+  transition: font-size 0.3s ease-in-out;
+}
+
+/* Scrolled state: compact navbar */
+.scrolled {
+  padding: 8px 40px;
+
+  @media (min-width: $media-tablet) {
+    padding: 8px 60px;
+  }
+
+  .logo {
+    width: 0;
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+  }
+
+  .logoContainer {
+    gap: 0;
+  }
+
+  .logoText {
+    font-size: 1.1rem;
+  }
 }
 
 .link_container {

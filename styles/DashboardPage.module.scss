@@ -58,6 +58,7 @@
   .status-ricevuto { background: #facc15; color: #111; }
   .status-consegnato { background: #16a34a; }
   .status-rifiutato { background: #ff0000; }
+  .status-pagato { background: #6366f1; }
 
   .orderItems {
     display: flex;
@@ -187,4 +188,74 @@
 .hasNotes {
   border: 2px solid #f59e0b;
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+/* Confirmation modal */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalBox {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 32px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+  text-align: center;
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--foreground);
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.modalConfirm {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #4f46e5;
+  }
+}
+
+.modalCancel {
+  background: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #ddd;
+  }
 }

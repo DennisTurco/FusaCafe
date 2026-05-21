@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.fusacafe.it
+
+# Sitemaps
+Sitemap: https://www.fusacafe.it/sitemap.xml

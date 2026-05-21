@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/Menu.module.scss";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
@@ -48,6 +48,8 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedOptionsMap, setSelectedOptionsMap] = useState<Record<string, Option[]>>({});
   const [orderNotes, setOrderNotes] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("");
+  const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     client.fetch(`*[_type == "menuItem"][0]{
@@ -79,6 +81,18 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
     acc[cat].push(item);
     return acc;
   }, {} as Record<string, MenuItem[]>);
+
+  const categories = Object.keys(itemsByCategory);
+
+  function scrollToCategory(cat: string) {
+    const el = categoryRefs.current[cat];
+    if (!el) return;
+    const navbarHeight = 80;
+    const catNavHeight = 52;
+    const offset = el.getBoundingClientRect().top + window.scrollY - navbarHeight - catNavHeight - 12;
+    window.scrollTo({ top: offset, behavior: "smooth" });
+    setActiveCategory(cat);
+  }
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
@@ -203,12 +217,30 @@ export default function MenuSection({ canOrder }: { canOrder?: boolean }) {
       <h2 className={styles.sectionTitle}>{menuName}</h2>
       <p className={styles.description}>{menuDescription}</p>
 
+      {categories.length > 1 && (
+        <nav className={styles.categoryNav}>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`${styles.categoryNavBtn} ${activeCategory === cat ? styles.categoryNavBtnActive : ""}`}
+              onClick={() => scrollToCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </nav>
+      )}
+
       <div className={styles.menuList}>
         {menuItems.length === 0 ? (
           <p className={styles.noMenu}>Menu non disponibile</p>
         ) : (
           Object.entries(itemsByCategory).map(([category, items]) => (
-            <div key={category} className={styles.categorySection}>
+            <div
+              key={category}
+              className={styles.categorySection}
+              ref={(el) => { categoryRefs.current[category] = el; }}
+            >
               <h3 className={styles.categoryTitle}>{category}</h3>
               {items.map(item => (
 <div key={item._key}className={`${styles.menuItem} ${!item.availability ? styles.soldOut : ""}`}>

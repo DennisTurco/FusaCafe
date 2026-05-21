@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrFormClose } from "react-icons/gr";
@@ -11,15 +11,22 @@ import PrenotaButton from "./PrenotaButton";
 
 export const Navbar: React.FC = () => {
     const [hamburgerClicked, setHamburgerClicked] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 60);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-        <header className={styles.container}>
+        <header className={`${styles.container} ${scrolled ? styles.scrolled : ""}`}>
             <Link href="/" className={styles.logoContainer}>
-                <Image 
-                    src="/images/logo.webp" 
+                <Image
+                    src="/images/logo.webp"
                     alt="logo"
-                    width={150} 
-                    height={50} 
+                    width={150}
+                    height={50}
                     className={styles.logo}
                     loading="lazy"
                 />

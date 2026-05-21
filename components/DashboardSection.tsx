@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "/styles/DashboardPage.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 
-type OrderStatus = "ricevuto" | "consegnato" | "rifiutato";
+type OrderStatus = "ricevuto" | "consegnato" | "rifiutato" | "pagato";
 
 interface OrderItem {
   id: string;
@@ -48,6 +48,7 @@ export const DashboardSection: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activePin, setActivePin] = useState<Pin | null>(null);
   const [loading, setLoading] = useState(true);
+  const [confirmModal, setConfirmModal] = useState<{ orderId: string; newStatus: OrderStatus } | null>(null);
   const prevOrdersRef = useRef<Order[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -129,19 +130,49 @@ export const DashboardSection: React.FC = () => {
       });
       if (!res.ok) throw new Error("Errore aggiornamento stato");
       toast.success("Stato aggiornato!");
-      fetchOrders(); // Aggiorna lista ordini
+      fetchOrders();
     } catch {
       toast.error("Errore aggiornamento stato");
     }
   };
 
+  const handleStatusChange = (orderId: string, newStatus: OrderStatus) => {
+    if (newStatus === "pagato") {
+      setConfirmModal({ orderId, newStatus });
+    } else {
+      updateStatus(orderId, newStatus);
+    }
+  };
+
+  const confirmStatusChange = async () => {
+    if (!confirmModal) return;
+    await updateStatus(confirmModal.orderId, confirmModal.newStatus);
+    setConfirmModal(null);
+  };
+
   if (loading) return <div className={styles.loading}>Caricamento ordini...</div>;
+
+  const visibleOrders = orders.filter((o) => o.status !== "pagato");
 
   return (
     <div className={styles.dashboard}>
       <Toaster position="top-right" />
       <audio ref={audioRef} src="/sounds/notification.wav" preload="auto" />
       <h1></h1>
+
+      {/* Confirmation modal for "pagato" */}
+      {confirmModal && (
+        <div className={styles.modalBackdrop} onClick={() => setConfirmModal(null)}>
+          <div className={styles.modalBox} onClick={(e) => e.stopPropagation()}>
+            <h3>Conferma pagamento</h3>
+            <p>Sei sicuro di voler segnare questo ordine come <strong>pagato</strong>? L&apos;ordine verrà nascosto dalla lista.</p>
+            <div className={styles.modalActions}>
+              <button className={styles.modalConfirm} onClick={confirmStatusChange}>Conferma</button>
+              <button className={styles.modalCancel} onClick={() => setConfirmModal(null)}>Annulla</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {activePin ? (
         <div className={styles.pinBanner}>
@@ -164,11 +195,11 @@ export const DashboardSection: React.FC = () => {
         </div>
       )}
 
-      {orders.length === 0 ? (
+      {visibleOrders.length === 0 ? (
         <div className={styles.noOrders}>Nessun ordine presente</div>
       ) : (
         <div className={styles.ordersContainer}>
-          {orders.map((order) => {
+          {visibleOrders.map((order) => {
             const total = order.order_items.reduce((sum, i) => {
             const basePrice = parseFloat(i.price);
             const optionsPrice =
@@ -249,12 +280,13 @@ export const DashboardSection: React.FC = () => {
                   <select
                     value={order.status}
                     onChange={(e) =>
-                      updateStatus(order.id, e.target.value as OrderStatus)
+                      handleStatusChange(order.id, e.target.value as OrderStatus)
                     }
                   >
                     <option value="ricevuto">Ricevuto</option>
                     <option value="consegnato">Consegnato</option>
                     <option value="rifiutato">Rifiutato</option>
+                    <option value="pagato">Pagato</option>
                   </select>
                 </div>
               </div>
